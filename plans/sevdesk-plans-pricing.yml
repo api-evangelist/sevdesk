@@ -1,0 +1,145 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: sevdesk
+providerId: sevdesk
+created: '2026-07-12'
+modified: '2026-07-12'
+reconciled: false
+tags:
+- Accounting
+- Invoicing
+- Bookkeeping
+- SaaS
+- Plans
+description: >-
+  sevdesk is sold as a per-account SaaS subscription in EUR (net, plus German
+  VAT). The API is included in the subscription at no extra charge - there is no
+  separate API plan or per-call fee; the same account data you edit in the web
+  app is what the API reads and writes. Published tiers are Rechnung
+  (invoicing), Buchhaltung (accounting), Buchhaltung Pro, and Warenwirtschaft
+  (inventory / ERP). A free trial is available, and longer contract terms (12 or
+  24 months) reduce the monthly price versus flexible monthly billing. The
+  prices below reflect flexible monthly billing observed on the public pricing
+  page and are not reconciled.
+notes: >-
+  sevdesk positions its plans by feature depth (invoicing only, full accounting,
+  pro accounting, inventory), not by API usage. Verify current EUR prices, VAT
+  handling, trial length, and contract-term discounts on sevdesk.de/preise
+  during reconciliation. Prices are per account and exclude VAT.
+sources:
+- https://sevdesk.de/preise/
+- https://sevdesk.de/produktuebersicht/
+- https://api.sevdesk.de/
+plans:
+- id: sevdesk-trial
+  name: Free Trial
+  type: free
+  description: >-
+    Time-limited free trial of sevdesk with no payment details required up front,
+    used to evaluate the product and the API before subscribing.
+  entries:
+  - label: Trial Access
+    name: trial_access
+    type: flat
+    metric: account
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: free (time-limited trial)
+    userMultiplied: false
+  elements:
+  - name: Full Feature Evaluation
+  - name: API Access
+- id: sevdesk-rechnung
+  name: Rechnung (Invoicing)
+  type: paid
+  description: >-
+    Invoicing-focused plan - create and send quotations, invoices, and credit
+    notes, manage contacts and parts. Includes API access.
+  entries:
+  - label: Subscription (monthly billing)
+    name: rechnung_monthly
+    type: flat
+    metric: account
+    limit: -1
+    timeFrame: month
+    geo: DE
+    unit: 1
+    price: EUR 12.90 per month plus VAT (flexible monthly billing)
+    userMultiplied: false
+  elements:
+  - name: Invoices and Quotations
+  - name: Contacts
+  - name: Parts
+  - name: API Access
+- id: sevdesk-buchhaltung
+  name: Buchhaltung (Accounting)
+  type: paid
+  description: >-
+    Full accounting plan - everything in Rechnung plus vouchers/receipts, EUer
+    and P&L, document management, and an online banking interface for payment
+    reconciliation. Includes API access.
+  entries:
+  - label: Subscription (monthly billing)
+    name: buchhaltung_monthly
+    type: flat
+    metric: account
+    limit: -1
+    timeFrame: month
+    geo: DE
+    unit: 1
+    price: EUR 25.90 per month plus VAT (flexible monthly billing)
+    userMultiplied: false
+  elements:
+  - name: Vouchers and Receipts
+  - name: Bank Reconciliation
+  - name: DATEV Export
+  - name: API Access
+- id: sevdesk-buchhaltung-pro
+  name: Buchhaltung Pro
+  type: paid
+  description: >-
+    Professional accounting plan with the broadest bookkeeping feature set for
+    growing businesses and closer tax-advisor collaboration. Includes API access.
+  entries:
+  - label: Subscription (monthly billing)
+    name: buchhaltung_pro_monthly
+    type: flat
+    metric: account
+    limit: -1
+    timeFrame: month
+    geo: DE
+    unit: 1
+    price: EUR 34.90 per month plus VAT (flexible monthly billing)
+    userMultiplied: false
+  elements:
+  - name: Advanced Accounting
+  - name: DATEV CSV and XML Export
+  - name: API Access
+- id: sevdesk-warenwirtschaft
+  name: Warenwirtschaft (Inventory / ERP)
+  type: paid
+  description: >-
+    Largest package adding inventory management / merchandise management on top
+    of the accounting features. Includes API access.
+  entries:
+  - label: Subscription (monthly billing)
+    name: warenwirtschaft_monthly
+    type: flat
+    metric: account
+    limit: -1
+    timeFrame: month
+    geo: DE
+    unit: 1
+    price: approximately EUR 45 per month plus VAT (verify on pricing page)
+    userMultiplied: false
+  elements:
+  - name: Inventory Management
+  - name: Parts and Stock
+  - name: Accounting
+  - name: API Access
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

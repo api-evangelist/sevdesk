@@ -1,0 +1,244 @@
+aid: sevdesk
+url: https://raw.githubusercontent.com/api-evangelist/sevdesk/refs/heads/main/apis.yml
+name: sevdesk
+kind: company
+description: sevdesk is a German cloud accounting, invoicing, and bookkeeping
+  platform for freelancers and small businesses. Its RESTful API (base
+  https://my.sevdesk.de/api/v1) exposes everything the web application does -
+  contacts, invoices, orders, credit notes, vouchers (receipts), bank check
+  accounts and transactions, parts (inventory), tags, plus DATEV and CSV
+  exports - authenticated with a per-administrator API token passed in the
+  Authorization header. Nested resources can be pulled in with the embed query
+  parameter.
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+tags:
+- Accounting
+- Invoicing
+- Bookkeeping
+- Finance
+- Germany
+- Vouchers
+- Contacts
+- SaaS
+- ERP
+- Financial Software
+created: '2026-07-12'
+modified: '2026-07-12'
+specificationVersion: '0.19'
+apis:
+- aid: sevdesk:sevdesk-contacts-api
+  name: sevdesk Contacts API
+  tags:
+  - Contacts
+  - Customers
+  - CRM
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://api.sevdesk.de/
+  baseURL: https://my.sevdesk.de/api/v1
+  properties:
+  - url: https://api.sevdesk.de/
+    type: Documentation
+  - url: https://api.sevdesk.de/
+    type: APIReference
+  - url: openapi/sevdesk-openapi.yml
+    type: OpenAPI
+  - url: collections/sevdesk.postman_collection.json
+    type: PostmanCollection
+  - url: collections/sevdesk.opencollection.json
+    type: OpenCollection
+  description: Create, retrieve, update, and delete contacts - customers,
+    suppliers, and partners - along with helpers such as the next free customer
+    number. Contact addresses and communication ways attach to each contact.
+- aid: sevdesk:sevdesk-invoices-api
+  name: sevdesk Invoices API
+  tags:
+  - Invoices
+  - Billing
+  - PDF
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://api.sevdesk.de/
+  baseURL: https://my.sevdesk.de/api/v1
+  properties:
+  - url: https://api.sevdesk.de/
+    type: Documentation
+  - url: openapi/sevdesk-openapi.yml
+    type: OpenAPI
+  - url: collections/sevdesk.postman_collection.json
+    type: PostmanCollection
+  - url: collections/sevdesk.opencollection.json
+    type: OpenCollection
+  description: Create invoices with their positions via the saveInvoice factory,
+    list and retrieve invoices, render and download the PDF, fetch e-invoice XML,
+    send invoices by email, and drive the invoice lifecycle (book, enshrine,
+    cancel, reset).
+- aid: sevdesk:sevdesk-orders-api
+  name: sevdesk Orders API
+  tags:
+  - Orders
+  - Quotations
+  - Sales
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://api.sevdesk.de/
+  baseURL: https://my.sevdesk.de/api/v1
+  properties:
+  - url: https://api.sevdesk.de/
+    type: Documentation
+  - url: openapi/sevdesk-openapi.yml
+    type: OpenAPI
+  - url: collections/sevdesk.postman_collection.json
+    type: PostmanCollection
+  - url: collections/sevdesk.opencollection.json
+    type: OpenCollection
+  description: Manage orders and quotations - create with positions via the
+    saveOrder factory, list, retrieve, update, and delete, fetch positions and
+    discounts, generate packing lists or contract notes, and send orders by email.
+- aid: sevdesk:sevdesk-credit-notes-api
+  name: sevdesk Credit Notes API
+  tags:
+  - Credit Notes
+  - Refunds
+  - Accounting
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://api.sevdesk.de/
+  baseURL: https://my.sevdesk.de/api/v1
+  properties:
+  - url: https://api.sevdesk.de/
+    type: Documentation
+  - url: openapi/sevdesk-openapi.yml
+    type: OpenAPI
+  - url: collections/sevdesk.postman_collection.json
+    type: PostmanCollection
+  - url: collections/sevdesk.opencollection.json
+    type: OpenCollection
+  description: Issue credit notes with the saveCreditNote factory or derive them
+    from an existing invoice or voucher, then list, retrieve, render the PDF, send
+    by email, book, and enshrine them.
+- aid: sevdesk:sevdesk-vouchers-api
+  name: sevdesk Vouchers API
+  tags:
+  - Vouchers
+  - Receipts
+  - Bookkeeping
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://api.sevdesk.de/
+  baseURL: https://my.sevdesk.de/api/v1
+  properties:
+  - url: https://api.sevdesk.de/
+    type: Documentation
+  - url: openapi/sevdesk-openapi.yml
+    type: OpenAPI
+  - url: collections/sevdesk.postman_collection.json
+    type: PostmanCollection
+  - url: collections/sevdesk.opencollection.json
+    type: OpenCollection
+  description: Book expense and revenue vouchers (receipts) - upload the receipt
+    file, create the voucher with positions via saveVoucher, retrieve and update
+    vouchers, and use receipt-guidance helpers to pick the correct booking account.
+- aid: sevdesk:sevdesk-bank-transactions-api
+  name: sevdesk Bank and Transactions API
+  tags:
+  - Banking
+  - Transactions
+  - Reconciliation
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://api.sevdesk.de/
+  baseURL: https://my.sevdesk.de/api/v1
+  properties:
+  - url: https://api.sevdesk.de/
+    type: Documentation
+  - url: openapi/sevdesk-openapi.yml
+    type: OpenAPI
+  - url: collections/sevdesk.postman_collection.json
+    type: PostmanCollection
+  - url: collections/sevdesk.opencollection.json
+    type: OpenCollection
+  description: Manage bank and clearing check accounts and the transactions booked
+    against them - list and create accounts, import and create transactions, fetch
+    account balance at a date, and enshrine transactions for audit safety.
+- aid: sevdesk:sevdesk-parts-api
+  name: sevdesk Parts API
+  tags:
+  - Parts
+  - Inventory
+  - Catalog
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://api.sevdesk.de/
+  baseURL: https://my.sevdesk.de/api/v1
+  properties:
+  - url: https://api.sevdesk.de/
+    type: Documentation
+  - url: openapi/sevdesk-openapi.yml
+    type: OpenAPI
+  - url: collections/sevdesk.postman_collection.json
+    type: PostmanCollection
+  - url: collections/sevdesk.opencollection.json
+    type: OpenCollection
+  description: Manage parts / articles used on invoices and orders - create, list,
+    retrieve, and update parts, and read current stock levels for inventory-aware
+    workflows.
+- aid: sevdesk:sevdesk-tags-api
+  name: sevdesk Tags API
+  tags:
+  - Tags
+  - Labels
+  - Organization
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://api.sevdesk.de/
+  baseURL: https://my.sevdesk.de/api/v1
+  properties:
+  - url: https://api.sevdesk.de/
+    type: Documentation
+  - url: openapi/sevdesk-openapi.yml
+    type: OpenAPI
+  - url: collections/sevdesk.postman_collection.json
+    type: PostmanCollection
+  - url: collections/sevdesk.opencollection.json
+    type: OpenCollection
+  description: Create tags and relate them to resources, then list, retrieve,
+    update, and delete tags and inspect tag relations across the account.
+- aid: sevdesk:sevdesk-export-reports-api
+  name: sevdesk Export and Reports API
+  tags:
+  - Export
+  - DATEV
+  - Reports
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://api.sevdesk.de/
+  baseURL: https://my.sevdesk.de/api/v1
+  properties:
+  - url: https://api.sevdesk.de/
+    type: Documentation
+  - url: openapi/sevdesk-openapi.yml
+    type: OpenAPI
+  - url: collections/sevdesk.postman_collection.json
+    type: PostmanCollection
+  - url: collections/sevdesk.opencollection.json
+    type: OpenCollection
+  description: Export accounting data for the tax advisor - start DATEV CSV/XML ZIP
+    export jobs, track progress and download, export invoices, credit notes,
+    vouchers, transactions, and contacts as CSV/ZIP, and pull invoice, order,
+    contact, and voucher report lists.
+common:
+- type: DomainSecurity
+  url: security/sevdesk-domain-security.yml
+- type: Authentication
+  url: authentication/sevdesk-authentication.yml
+- type: GitHubOrganization
+  url: https://github.com/sevdesk
+- type: LinkedIn
+  url: https://www.linkedin.com/company/sevdesk
+- type: Website
+  url: https://sevdesk.de
+- type: Documentation
+  url: https://api.sevdesk.de/
+- type: Plans
+  url: plans/sevdesk-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/sevdesk-rate-limits.yml
+- type: FinOps
+  url: finops/sevdesk-finops.yml
+- url: https://tech.sevdesk.com/
+  type: Blog
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

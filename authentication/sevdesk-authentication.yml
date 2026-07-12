@@ -1,0 +1,22 @@
+generated: '2026-07-12'
+method: derived
+source: openapi/sevdesk-openapi.yml
+summary:
+  types:
+  - apiKey
+schemes:
+- name: api_key
+  type: apiKey
+  in: header
+  headerName: Authorization
+  description: >-
+    Per-administrator sevdesk API token - a 32-character hexadecimal string
+    found in the sevdesk web application under the user's settings. Passed as
+    the raw value of the `Authorization` header (no `Bearer` prefix), for
+    example `Authorization: b7794de0085f5cd00560f160f290af38`. Tokens have an
+    infinite lifetime and can be regenerated (confirmed with the account
+    password) to revoke a previous token. Self-serve: any paying account
+    administrator can obtain a token with no separate application or approval.
+  sources:
+  - openapi/sevdesk-openapi.yml
+  - https://api.sevdesk.de/

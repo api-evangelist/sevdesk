@@ -1,0 +1,342 @@
+{
+  "info": {
+    "name": "sevdesk API",
+    "description": "Grounded subset of the sevdesk cloud accounting / invoicing REST API. Base URL: https://my.sevdesk.de/api/v1. Authentication is a per-administrator API token (32-character hexadecimal string) passed as the raw value of the Authorization header (no Bearer prefix). Paths, methods, and operationIds are taken from sevdesk's official OpenAPI specification.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      { "key": "key", "value": "Authorization", "type": "string" },
+      { "key": "value", "value": "{{apiToken}}", "type": "string" },
+      { "key": "in", "value": "header", "type": "string" }
+    ]
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "https://my.sevdesk.de/api/v1", "type": "string" },
+    { "key": "apiToken", "value": "", "type": "string" }
+  ],
+  "item": [
+    {
+      "name": "Contact",
+      "item": [
+        {
+          "name": "Retrieve contacts",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/Contact?limit=100&offset=0", "host": ["{{baseUrl}}"], "path": ["Contact"], "query": [ { "key": "limit", "value": "100" }, { "key": "offset", "value": "0" } ] },
+            "description": "Retrieves a list of contacts."
+          }
+        },
+        {
+          "name": "Create a new contact",
+          "request": {
+            "method": "POST",
+            "header": [ { "key": "Content-Type", "value": "application/json" } ],
+            "body": { "mode": "raw", "raw": "{\n  \"name\": \"Example GmbH\",\n  \"category\": { \"id\": 3, \"objectName\": \"Category\" }\n}" },
+            "url": { "raw": "{{baseUrl}}/Contact", "host": ["{{baseUrl}}"], "path": ["Contact"] },
+            "description": "Creates a new contact. category is required (id 3 = Customer)."
+          }
+        },
+        {
+          "name": "Find contact by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/Contact/:contactId", "host": ["{{baseUrl}}"], "path": ["Contact", ":contactId"], "variable": [ { "key": "contactId", "value": "" } ] },
+            "description": "Retrieves a single contact by ID."
+          }
+        },
+        {
+          "name": "Update a existing contact",
+          "request": {
+            "method": "PUT",
+            "header": [ { "key": "Content-Type", "value": "application/json" } ],
+            "body": { "mode": "raw", "raw": "{}" },
+            "url": { "raw": "{{baseUrl}}/Contact/:contactId", "host": ["{{baseUrl}}"], "path": ["Contact", ":contactId"], "variable": [ { "key": "contactId", "value": "" } ] },
+            "description": "Updates an existing contact."
+          }
+        },
+        {
+          "name": "Deletes a contact",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/Contact/:contactId", "host": ["{{baseUrl}}"], "path": ["Contact", ":contactId"], "variable": [ { "key": "contactId", "value": "" } ] },
+            "description": "Deletes a contact."
+          }
+        },
+        {
+          "name": "Get next free customer number",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/Contact/Factory/getNextCustomerNumber", "host": ["{{baseUrl}}"], "path": ["Contact", "Factory", "getNextCustomerNumber"] },
+            "description": "Returns the next free customer number sevdesk would assign."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Invoice",
+      "item": [
+        {
+          "name": "Retrieve invoices",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/Invoice?limit=100&offset=0", "host": ["{{baseUrl}}"], "path": ["Invoice"], "query": [ { "key": "limit", "value": "100" }, { "key": "offset", "value": "0" } ] },
+            "description": "Retrieves a list of invoices."
+          }
+        },
+        {
+          "name": "Create a new invoice",
+          "request": {
+            "method": "POST",
+            "header": [ { "key": "Content-Type", "value": "application/json" } ],
+            "body": { "mode": "raw", "raw": "{\n  \"invoice\": {},\n  \"invoicePosSave\": [],\n  \"invoicePosDelete\": null\n}" },
+            "url": { "raw": "{{baseUrl}}/Invoice/Factory/saveInvoice", "host": ["{{baseUrl}}"], "path": ["Invoice", "Factory", "saveInvoice"] },
+            "description": "Creates a new invoice together with its positions via the saveInvoice factory."
+          }
+        },
+        {
+          "name": "Find invoice by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/Invoice/:invoiceId", "host": ["{{baseUrl}}"], "path": ["Invoice", ":invoiceId"], "variable": [ { "key": "invoiceId", "value": "" } ] },
+            "description": "Retrieves a single invoice by ID."
+          }
+        },
+        {
+          "name": "Retrieve pdf document of an invoice",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/Invoice/:invoiceId/getPdf", "host": ["{{baseUrl}}"], "path": ["Invoice", ":invoiceId", "getPdf"], "variable": [ { "key": "invoiceId", "value": "" } ] },
+            "description": "Returns the rendered PDF document for an invoice."
+          }
+        },
+        {
+          "name": "Send invoice via email",
+          "request": {
+            "method": "POST",
+            "header": [ { "key": "Content-Type", "value": "application/json" } ],
+            "body": { "mode": "raw", "raw": "{\n  \"toEmail\": \"customer@example.com\",\n  \"subject\": \"Your invoice\",\n  \"text\": \"Please find your invoice attached.\"\n}" },
+            "url": { "raw": "{{baseUrl}}/Invoice/:invoiceId/sendViaEmail", "host": ["{{baseUrl}}"], "path": ["Invoice", ":invoiceId", "sendViaEmail"], "variable": [ { "key": "invoiceId", "value": "" } ] },
+            "description": "Sends the invoice to a recipient by email."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Order",
+      "item": [
+        {
+          "name": "Retrieve orders",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/Order?limit=100&offset=0", "host": ["{{baseUrl}}"], "path": ["Order"], "query": [ { "key": "limit", "value": "100" }, { "key": "offset", "value": "0" } ] },
+            "description": "Retrieves a list of orders."
+          }
+        },
+        {
+          "name": "Create a new order",
+          "request": {
+            "method": "POST",
+            "header": [ { "key": "Content-Type", "value": "application/json" } ],
+            "body": { "mode": "raw", "raw": "{\n  \"order\": {},\n  \"orderPosSave\": [],\n  \"orderPosDelete\": null\n}" },
+            "url": { "raw": "{{baseUrl}}/Order/Factory/saveOrder", "host": ["{{baseUrl}}"], "path": ["Order", "Factory", "saveOrder"] },
+            "description": "Creates a new order together with its positions."
+          }
+        },
+        {
+          "name": "Find order by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/Order/:orderId", "host": ["{{baseUrl}}"], "path": ["Order", ":orderId"], "variable": [ { "key": "orderId", "value": "" } ] },
+            "description": "Retrieves a single order by ID."
+          }
+        },
+        {
+          "name": "Update an existing order",
+          "request": {
+            "method": "PUT",
+            "header": [ { "key": "Content-Type", "value": "application/json" } ],
+            "body": { "mode": "raw", "raw": "{}" },
+            "url": { "raw": "{{baseUrl}}/Order/:orderId", "host": ["{{baseUrl}}"], "path": ["Order", ":orderId"], "variable": [ { "key": "orderId", "value": "" } ] },
+            "description": "Updates an existing order."
+          }
+        },
+        {
+          "name": "Deletes an order",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/Order/:orderId", "host": ["{{baseUrl}}"], "path": ["Order", ":orderId"], "variable": [ { "key": "orderId", "value": "" } ] },
+            "description": "Deletes an order."
+          }
+        }
+      ]
+    },
+    {
+      "name": "CreditNote",
+      "item": [
+        {
+          "name": "Retrieve CreditNote",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/CreditNote?limit=100&offset=0", "host": ["{{baseUrl}}"], "path": ["CreditNote"], "query": [ { "key": "limit", "value": "100" }, { "key": "offset", "value": "0" } ] },
+            "description": "Retrieves a list of credit notes."
+          }
+        },
+        {
+          "name": "Create a new creditNote",
+          "request": {
+            "method": "POST",
+            "header": [ { "key": "Content-Type", "value": "application/json" } ],
+            "body": { "mode": "raw", "raw": "{\n  \"creditNote\": {},\n  \"creditNotePosSave\": [],\n  \"creditNotePosDelete\": null\n}" },
+            "url": { "raw": "{{baseUrl}}/CreditNote/Factory/saveCreditNote", "host": ["{{baseUrl}}"], "path": ["CreditNote", "Factory", "saveCreditNote"] },
+            "description": "Creates a new credit note together with its positions."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Voucher",
+      "item": [
+        {
+          "name": "Retrieve vouchers",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/Voucher?limit=100&offset=0", "host": ["{{baseUrl}}"], "path": ["Voucher"], "query": [ { "key": "limit", "value": "100" }, { "key": "offset", "value": "0" } ] },
+            "description": "Retrieves a list of vouchers (receipts)."
+          }
+        },
+        {
+          "name": "Create a new voucher",
+          "request": {
+            "method": "POST",
+            "header": [ { "key": "Content-Type", "value": "application/json" } ],
+            "body": { "mode": "raw", "raw": "{\n  \"voucher\": {},\n  \"voucherPosSave\": [],\n  \"voucherPosDelete\": null\n}" },
+            "url": { "raw": "{{baseUrl}}/Voucher/Factory/saveVoucher", "host": ["{{baseUrl}}"], "path": ["Voucher", "Factory", "saveVoucher"] },
+            "description": "Creates a new voucher together with its positions."
+          }
+        },
+        {
+          "name": "Find voucher by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/Voucher/:voucherId", "host": ["{{baseUrl}}"], "path": ["Voucher", ":voucherId"], "variable": [ { "key": "voucherId", "value": "" } ] },
+            "description": "Retrieves a single voucher by ID."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Bank and Transactions",
+      "item": [
+        {
+          "name": "Retrieve check accounts",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/CheckAccount", "host": ["{{baseUrl}}"], "path": ["CheckAccount"] },
+            "description": "Retrieves the list of bank and clearing check accounts."
+          }
+        },
+        {
+          "name": "Find check account by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/CheckAccount/:checkAccountId", "host": ["{{baseUrl}}"], "path": ["CheckAccount", ":checkAccountId"], "variable": [ { "key": "checkAccountId", "value": "" } ] },
+            "description": "Retrieves a single check account by ID."
+          }
+        },
+        {
+          "name": "Retrieve transactions",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/CheckAccountTransaction?limit=100&offset=0", "host": ["{{baseUrl}}"], "path": ["CheckAccountTransaction"], "query": [ { "key": "limit", "value": "100" }, { "key": "offset", "value": "0" } ] },
+            "description": "Retrieves transactions booked against check accounts."
+          }
+        },
+        {
+          "name": "Create a new transaction",
+          "request": {
+            "method": "POST",
+            "header": [ { "key": "Content-Type", "value": "application/json" } ],
+            "body": { "mode": "raw", "raw": "{}" },
+            "url": { "raw": "{{baseUrl}}/CheckAccountTransaction", "host": ["{{baseUrl}}"], "path": ["CheckAccountTransaction"] },
+            "description": "Creates a new check account transaction."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Part",
+      "item": [
+        {
+          "name": "Retrieve parts",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/Part?limit=100&offset=0", "host": ["{{baseUrl}}"], "path": ["Part"], "query": [ { "key": "limit", "value": "100" }, { "key": "offset", "value": "0" } ] },
+            "description": "Retrieves a list of parts / articles."
+          }
+        },
+        {
+          "name": "Create a new part",
+          "request": {
+            "method": "POST",
+            "header": [ { "key": "Content-Type", "value": "application/json" } ],
+            "body": { "mode": "raw", "raw": "{\n  \"name\": \"Widget\",\n  \"partNumber\": \"W-001\",\n  \"unity\": { \"id\": 1, \"objectName\": \"Unity\" }\n}" },
+            "url": { "raw": "{{baseUrl}}/Part", "host": ["{{baseUrl}}"], "path": ["Part"] },
+            "description": "Creates a new part / article."
+          }
+        },
+        {
+          "name": "Get stock of a part",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/Part/:partId/getStock", "host": ["{{baseUrl}}"], "path": ["Part", ":partId", "getStock"], "variable": [ { "key": "partId", "value": "" } ] },
+            "description": "Returns the current stock quantity of a part."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Tag",
+      "item": [
+        {
+          "name": "Retrieve tags",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/Tag", "host": ["{{baseUrl}}"], "path": ["Tag"] },
+            "description": "Retrieves the list of tags."
+          }
+        },
+        {
+          "name": "Create a new tag",
+          "request": {
+            "method": "POST",
+            "header": [ { "key": "Content-Type", "value": "application/json" } ],
+            "body": { "mode": "raw", "raw": "{\n  \"name\": \"priority\",\n  \"objectType\": \"Invoice\"\n}" },
+            "url": { "raw": "{{baseUrl}}/Tag/Factory/create", "host": ["{{baseUrl}}"], "path": ["Tag", "Factory", "create"] },
+            "description": "Creates a new tag and relates it to an object."
+          }
+        }
+      ]
+    }
+  ]
+}

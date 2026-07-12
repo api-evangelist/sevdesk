@@ -1,0 +1,132 @@
+aid: sevdesk
+name: sevdesk
+review:
+  question: Does sevDesk expose a documented public WebSocket API?
+  answer: false
+  date: '2026-07-12'
+  reviewer: API Evangelist
+  asyncapiSpecCreated: false
+  asyncapiScopeNote: |
+    No AsyncAPI document was authored. sevdesk's entire documented public
+    surface is a request/response REST API over HTTPS (base
+    https://my.sevdesk.de/api/v1). There is no server-push transport -
+    no WebSocket (wss://) and no Server-Sent Events - documented anywhere in
+    sevdesk's official OpenAPI specification or developer docs, so there is
+    nothing to model in AsyncAPI. Long-running work (for example DATEV export
+    jobs) is handled with client-polled REST progress endpoints
+    (/Progress/getProgress), not a streaming transport.
+findings:
+  summary: |
+    sevdesk does not publish a documented public WebSocket API. sevdesk is a
+    German cloud accounting / invoicing / bookkeeping SaaS. Its public API is a
+    RESTful HTTPS interface with base URL https://my.sevdesk.de/api/v1 (official
+    OpenAPI reports API version 2.0.0 while the path segment remains v1).
+    Authentication is a per-administrator API token - a 32-character hexadecimal
+    string from the account's user settings - passed as the raw value of an
+    `Authorization` header (no `Bearer` prefix). Every function and data object
+    in the sevdesk web app is reachable over this REST API: contacts, invoices,
+    orders, credit notes, vouchers, check accounts and transactions, parts, tags,
+    and DATEV/CSV exports. No realtime, bidirectional, or streaming WebSocket
+    (ws:// or wss://) endpoint is documented.
+  accessModel: |
+    Self-serve. sevdesk is a paid SaaS (free trial available); any paying
+    account administrator can generate an API token in the web app with no
+    separate application, partner agreement, or approval step. The same token
+    grants full API access to that account's data. Tokens have an infinite
+    lifetime and can be regenerated (password-confirmed) to revoke old ones.
+  transports:
+    - protocol: REST
+      scheme: https
+      baseURL: https://my.sevdesk.de/api/v1
+      documented: true
+      note: The full sevdesk API. Request/response JSON over HTTPS, apiKey header auth.
+    - protocol: HTTP Polling
+      scheme: https
+      documented: true
+      note: Asynchronous export jobs are tracked by polling /Progress/getProgress and /ExportJob/jobDownloadInfo. Client-initiated, not server push.
+    - protocol: WebSocket
+      scheme: wss
+      documented: false
+      note: No WebSocket endpoint appears in sevdesk's official OpenAPI specification or developer documentation as of the review date.
+  authentication:
+    type: apiKey
+    header: Authorization
+    scheme: raw token (no Bearer prefix)
+    tokenFormat: 32-character hexadecimal string
+    note: One token per sevdesk administrator; infinite lifetime; regenerate to revoke.
+  endpointsConfirmedRest:
+    - GET    https://my.sevdesk.de/api/v1/Contact
+    - POST   https://my.sevdesk.de/api/v1/Contact
+    - GET    https://my.sevdesk.de/api/v1/Contact/{contactId}
+    - PUT    https://my.sevdesk.de/api/v1/Contact/{contactId}
+    - DELETE https://my.sevdesk.de/api/v1/Contact/{contactId}
+    - GET    https://my.sevdesk.de/api/v1/Contact/Factory/getNextCustomerNumber
+    - GET    https://my.sevdesk.de/api/v1/Invoice
+    - GET    https://my.sevdesk.de/api/v1/Invoice/{invoiceId}
+    - POST   https://my.sevdesk.de/api/v1/Invoice/Factory/saveInvoice
+    - GET    https://my.sevdesk.de/api/v1/Invoice/{invoiceId}/getPdf
+    - POST   https://my.sevdesk.de/api/v1/Invoice/{invoiceId}/sendViaEmail
+    - GET    https://my.sevdesk.de/api/v1/Order
+    - POST   https://my.sevdesk.de/api/v1/Order/Factory/saveOrder
+    - GET    https://my.sevdesk.de/api/v1/Order/{orderId}
+    - PUT    https://my.sevdesk.de/api/v1/Order/{orderId}
+    - DELETE https://my.sevdesk.de/api/v1/Order/{orderId}
+    - GET    https://my.sevdesk.de/api/v1/CreditNote
+    - POST   https://my.sevdesk.de/api/v1/CreditNote/Factory/saveCreditNote
+    - GET    https://my.sevdesk.de/api/v1/Voucher
+    - POST   https://my.sevdesk.de/api/v1/Voucher/Factory/saveVoucher
+    - GET    https://my.sevdesk.de/api/v1/Voucher/{voucherId}
+    - GET    https://my.sevdesk.de/api/v1/CheckAccount
+    - GET    https://my.sevdesk.de/api/v1/CheckAccount/{checkAccountId}
+    - GET    https://my.sevdesk.de/api/v1/CheckAccountTransaction
+    - POST   https://my.sevdesk.de/api/v1/CheckAccountTransaction
+    - GET    https://my.sevdesk.de/api/v1/Part
+    - POST   https://my.sevdesk.de/api/v1/Part
+    - GET    https://my.sevdesk.de/api/v1/Part/{partId}/getStock
+    - GET    https://my.sevdesk.de/api/v1/Tag
+    - POST   https://my.sevdesk.de/api/v1/Tag/Factory/create
+  confirmedVsModeled: |
+    CONFIRMED (from sevdesk's official OpenAPI specification, openapi 3.0.0,
+    reported version 2.0.0, servers https://my.sevdesk.de/api/v1): the base URL,
+    the apiKey `Authorization` header security scheme, all 22 resource tags
+    (Basics, CheckAccount, CheckAccountTransaction, PrivateTransactionRule,
+    AccountingContact, CommunicationWay, ContactAddress, Contact, ContactField,
+    CreditNote, CreditNotePos, Export, Part, Invoice, InvoicePos, Layout, Order,
+    OrderPos, Voucher, VoucherPos, Report, Tag - 119 documented paths total), and
+    every path, HTTP method, and operationId reproduced in
+    openapi/sevdesk-openapi.yml and the Postman / Open Collection.
+
+    MODELED: openapi/sevdesk-openapi.yml is a curated ~30-operation
+    representative subset of the 119 official paths, and the request/response
+    body schemas in it (Contact, Part, and the generic ObjectList /
+    ObjectResponse envelopes) are simplified stand-ins for sevdesk's much larger
+    official component schemas. sevdesk's real payloads use nested
+    id + objectName reference objects and many more fields. The plans,
+    rate-limits, and finops files are modeled from sevdesk's public pricing
+    pages and API docs and are marked reconciled:false.
+sources:
+  - url: https://api.sevdesk.de/
+    type: Documentation
+    note: Official sevdesk developer docs - REST API, embed parameter, token authentication in the Authorization header.
+  - url: https://my.sevdesk.de/api/v1
+    type: APIBaseURL
+    note: Production API base URL from the official OpenAPI servers block.
+  - url: https://github.com/j-mastr/sevdesk-api
+    type: OpenAPI
+    note: Community mirror carrying sevdesk's official OpenAPI specification (external/openapi.yaml), used to ground paths, methods, operationIds, tags, and the apiKey security scheme.
+  - url: https://tech.sevdesk.com/
+    type: Blog
+    note: sevdesk Tech Blog, including API news / changelog.
+  - url: https://sevdesk.de/preise/
+    type: Pricing
+    note: Public plan and pricing pages (Rechnung, Buchhaltung, Buchhaltung Pro, Warenwirtschaft) in EUR.
+actions:
+  asyncapiPath: null
+  apisYmlUpdated: true
+  reason: |
+    No WebSocket protocol surface exists. sevdesk's public API is
+    request/response REST over HTTPS with apiKey header authentication, so no
+    AsyncAPI document was created. A grounded OpenAPI subset, Postman
+    collection, and Open Collection were authored from the official
+    specification, and the apis.yml catalog entry was written with confirmed
+    base URL, auth, and resource coverage.

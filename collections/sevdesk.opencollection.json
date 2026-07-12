@@ -1,0 +1,293 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "sevdesk API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "apikey": {
+        "key": "Authorization",
+        "value": "{{apiToken}}",
+        "in": "header"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": { "name": "Contact", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "Retrieve contacts", "type": "http" },
+          "http": { "method": "GET", "url": "https://my.sevdesk.de/api/v1/Contact?limit=100&offset=0" },
+          "docs": "Retrieves a list of contacts. Use limit/offset to page and embed to expand nested resources."
+        },
+        {
+          "info": { "name": "Create a new contact", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://my.sevdesk.de/api/v1/Contact",
+            "body": { "type": "json", "data": "{\n  \"name\": \"Example GmbH\",\n  \"category\": { \"id\": 3, \"objectName\": \"Category\" }\n}" }
+          },
+          "docs": "Creates a new contact. category is required; id 3 is the Customer category."
+        },
+        {
+          "info": { "name": "Find contact by ID", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://my.sevdesk.de/api/v1/Contact/:contactId",
+            "params": [ { "name": "contactId", "value": "", "type": "path", "description": "The ID of the contact." } ]
+          },
+          "docs": "Retrieves a single contact by ID."
+        },
+        {
+          "info": { "name": "Update a existing contact", "type": "http" },
+          "http": {
+            "method": "PUT",
+            "url": "https://my.sevdesk.de/api/v1/Contact/:contactId",
+            "params": [ { "name": "contactId", "value": "", "type": "path", "description": "The ID of the contact." } ],
+            "body": { "type": "json", "data": "{}" }
+          },
+          "docs": "Updates an existing contact."
+        },
+        {
+          "info": { "name": "Deletes a contact", "type": "http" },
+          "http": {
+            "method": "DELETE",
+            "url": "https://my.sevdesk.de/api/v1/Contact/:contactId",
+            "params": [ { "name": "contactId", "value": "", "type": "path", "description": "The ID of the contact." } ]
+          },
+          "docs": "Deletes a contact."
+        },
+        {
+          "info": { "name": "Get next free customer number", "type": "http" },
+          "http": { "method": "GET", "url": "https://my.sevdesk.de/api/v1/Contact/Factory/getNextCustomerNumber" },
+          "docs": "Returns the next free customer number sevdesk would assign."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Invoice", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "Retrieve invoices", "type": "http" },
+          "http": { "method": "GET", "url": "https://my.sevdesk.de/api/v1/Invoice?limit=100&offset=0" },
+          "docs": "Retrieves a list of invoices."
+        },
+        {
+          "info": { "name": "Create a new invoice", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://my.sevdesk.de/api/v1/Invoice/Factory/saveInvoice",
+            "body": { "type": "json", "data": "{\n  \"invoice\": {},\n  \"invoicePosSave\": [],\n  \"invoicePosDelete\": null\n}" }
+          },
+          "docs": "Creates a new invoice together with its positions via the saveInvoice factory."
+        },
+        {
+          "info": { "name": "Find invoice by ID", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://my.sevdesk.de/api/v1/Invoice/:invoiceId",
+            "params": [ { "name": "invoiceId", "value": "", "type": "path", "description": "The ID of the invoice." } ]
+          },
+          "docs": "Retrieves a single invoice by ID."
+        },
+        {
+          "info": { "name": "Retrieve pdf document of an invoice", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://my.sevdesk.de/api/v1/Invoice/:invoiceId/getPdf",
+            "params": [ { "name": "invoiceId", "value": "", "type": "path", "description": "The ID of the invoice." } ]
+          },
+          "docs": "Returns the rendered PDF document for an invoice."
+        },
+        {
+          "info": { "name": "Send invoice via email", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://my.sevdesk.de/api/v1/Invoice/:invoiceId/sendViaEmail",
+            "params": [ { "name": "invoiceId", "value": "", "type": "path", "description": "The ID of the invoice." } ],
+            "body": { "type": "json", "data": "{\n  \"toEmail\": \"customer@example.com\",\n  \"subject\": \"Your invoice\",\n  \"text\": \"Please find your invoice attached.\"\n}" }
+          },
+          "docs": "Sends the invoice to a recipient by email."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Order", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "Retrieve orders", "type": "http" },
+          "http": { "method": "GET", "url": "https://my.sevdesk.de/api/v1/Order?limit=100&offset=0" },
+          "docs": "Retrieves a list of orders (quotations, order confirmations)."
+        },
+        {
+          "info": { "name": "Create a new order", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://my.sevdesk.de/api/v1/Order/Factory/saveOrder",
+            "body": { "type": "json", "data": "{\n  \"order\": {},\n  \"orderPosSave\": [],\n  \"orderPosDelete\": null\n}" }
+          },
+          "docs": "Creates a new order together with its positions."
+        },
+        {
+          "info": { "name": "Find order by ID", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://my.sevdesk.de/api/v1/Order/:orderId",
+            "params": [ { "name": "orderId", "value": "", "type": "path", "description": "The ID of the order." } ]
+          },
+          "docs": "Retrieves a single order by ID."
+        },
+        {
+          "info": { "name": "Update an existing order", "type": "http" },
+          "http": {
+            "method": "PUT",
+            "url": "https://my.sevdesk.de/api/v1/Order/:orderId",
+            "params": [ { "name": "orderId", "value": "", "type": "path", "description": "The ID of the order." } ],
+            "body": { "type": "json", "data": "{}" }
+          },
+          "docs": "Updates an existing order."
+        },
+        {
+          "info": { "name": "Deletes an order", "type": "http" },
+          "http": {
+            "method": "DELETE",
+            "url": "https://my.sevdesk.de/api/v1/Order/:orderId",
+            "params": [ { "name": "orderId", "value": "", "type": "path", "description": "The ID of the order." } ]
+          },
+          "docs": "Deletes an order."
+        }
+      ]
+    },
+    {
+      "info": { "name": "CreditNote", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "Retrieve CreditNote", "type": "http" },
+          "http": { "method": "GET", "url": "https://my.sevdesk.de/api/v1/CreditNote?limit=100&offset=0" },
+          "docs": "Retrieves a list of credit notes."
+        },
+        {
+          "info": { "name": "Create a new creditNote", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://my.sevdesk.de/api/v1/CreditNote/Factory/saveCreditNote",
+            "body": { "type": "json", "data": "{\n  \"creditNote\": {},\n  \"creditNotePosSave\": [],\n  \"creditNotePosDelete\": null\n}" }
+          },
+          "docs": "Creates a new credit note together with its positions."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Voucher", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "Retrieve vouchers", "type": "http" },
+          "http": { "method": "GET", "url": "https://my.sevdesk.de/api/v1/Voucher?limit=100&offset=0" },
+          "docs": "Retrieves a list of vouchers (receipts)."
+        },
+        {
+          "info": { "name": "Create a new voucher", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://my.sevdesk.de/api/v1/Voucher/Factory/saveVoucher",
+            "body": { "type": "json", "data": "{\n  \"voucher\": {},\n  \"voucherPosSave\": [],\n  \"voucherPosDelete\": null\n}" }
+          },
+          "docs": "Creates a new voucher together with its positions."
+        },
+        {
+          "info": { "name": "Find voucher by ID", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://my.sevdesk.de/api/v1/Voucher/:voucherId",
+            "params": [ { "name": "voucherId", "value": "", "type": "path", "description": "The ID of the voucher." } ]
+          },
+          "docs": "Retrieves a single voucher by ID."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Bank and Transactions", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "Retrieve check accounts", "type": "http" },
+          "http": { "method": "GET", "url": "https://my.sevdesk.de/api/v1/CheckAccount" },
+          "docs": "Retrieves the list of bank and clearing check accounts."
+        },
+        {
+          "info": { "name": "Find check account by ID", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://my.sevdesk.de/api/v1/CheckAccount/:checkAccountId",
+            "params": [ { "name": "checkAccountId", "value": "", "type": "path", "description": "The ID of the check account." } ]
+          },
+          "docs": "Retrieves a single check account by ID."
+        },
+        {
+          "info": { "name": "Retrieve transactions", "type": "http" },
+          "http": { "method": "GET", "url": "https://my.sevdesk.de/api/v1/CheckAccountTransaction?limit=100&offset=0" },
+          "docs": "Retrieves transactions booked against check accounts."
+        },
+        {
+          "info": { "name": "Create a new transaction", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://my.sevdesk.de/api/v1/CheckAccountTransaction",
+            "body": { "type": "json", "data": "{}" }
+          },
+          "docs": "Creates a new check account transaction."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Part", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "Retrieve parts", "type": "http" },
+          "http": { "method": "GET", "url": "https://my.sevdesk.de/api/v1/Part?limit=100&offset=0" },
+          "docs": "Retrieves a list of parts / articles."
+        },
+        {
+          "info": { "name": "Create a new part", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://my.sevdesk.de/api/v1/Part",
+            "body": { "type": "json", "data": "{\n  \"name\": \"Widget\",\n  \"partNumber\": \"W-001\",\n  \"unity\": { \"id\": 1, \"objectName\": \"Unity\" }\n}" }
+          },
+          "docs": "Creates a new part / article."
+        },
+        {
+          "info": { "name": "Get stock of a part", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://my.sevdesk.de/api/v1/Part/:partId/getStock",
+            "params": [ { "name": "partId", "value": "", "type": "path", "description": "The ID of the part." } ]
+          },
+          "docs": "Returns the current stock quantity of a part."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Tag", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "Retrieve tags", "type": "http" },
+          "http": { "method": "GET", "url": "https://my.sevdesk.de/api/v1/Tag" },
+          "docs": "Retrieves the list of tags."
+        },
+        {
+          "info": { "name": "Create a new tag", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://my.sevdesk.de/api/v1/Tag/Factory/create",
+            "body": { "type": "json", "data": "{\n  \"name\": \"priority\",\n  \"objectType\": \"Invoice\"\n}" }
+          },
+          "docs": "Creates a new tag and relates it to an object."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

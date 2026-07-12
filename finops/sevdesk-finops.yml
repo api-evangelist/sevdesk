@@ -1,0 +1,90 @@
+specification: FinOps Framework
+specificationVersion: '1.0'
+schema: https://www.finops.org/framework/
+provider: sevdesk
+providerId: sevdesk
+created: '2026-07-12'
+modified: '2026-07-12'
+reconciled: false
+tags:
+- Accounting
+- Invoicing
+- Bookkeeping
+- SaaS
+- Germany
+- FinOps
+- Cost Management
+- FOCUS
+description: >-
+  FinOps view of sevdesk spend. sevdesk is a per-account SaaS subscription
+  billed in EUR (net, plus German VAT), with tiers priced by feature depth -
+  Rechnung, Buchhaltung, Buchhaltung Pro, and Warenwirtschaft. The API is
+  included in the subscription with no separate API line item and no per-call
+  charge, so API usage does not directly drive cost. The dominant cost levers are
+  which plan tier an account is on, the contract term (flexible monthly vs 12/24
+  month terms that lower the monthly price), and the number of separate sevdesk
+  accounts an organisation runs.
+notes: >-
+  Per-unit prices are not reconciled here; verify current EUR tier prices, VAT
+  handling, and contract-term discounts on sevdesk.de/preise. Because billing is
+  a flat per-account subscription rather than metered usage, FinOps attention is
+  best spent on right-sizing the plan tier and consolidating accounts, not on API
+  call volume.
+sources:
+- https://sevdesk.de/preise/
+- https://sevdesk.de/produktuebersicht/
+- https://api.sevdesk.de/
+- https://focus.finops.org/focus-specification/v1-3/
+alignedWith:
+  framework: FinOps Foundation Framework
+  frameworkUrl: https://www.finops.org/framework/
+  dataSpec: FOCUS
+  dataSpecVersion: '1.3'
+  dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
+publisherName: sevdesk
+serviceCategory: Business Software - Accounting and Invoicing
+billingModel:
+  pricingCategory: Subscription-Based
+  billingFrequency: Monthly
+  billingCurrency: EUR
+  chargeCategories:
+  - Purchase
+  - Usage
+  - Adjustment
+focusColumns:
+  ServiceName: sevdesk Subscription
+  ServiceCategory: Business Software - Accounting and Invoicing
+  ProviderName: sevdesk
+  PublisherName: sevdesk
+  InvoiceIssuerName: sevdesk GmbH
+  BillingCurrency: EUR
+  ChargeCategory: Purchase
+  PricingCategory: Subscription-Based
+meters:
+- name: subscription
+  description: Flat monthly (or annual) per-account subscription fee for the chosen sevdesk plan tier, in EUR plus VAT.
+  unit: account-months
+  aggregation: sum
+  dimensions:
+  - account
+  - plan_tier
+  - contract_term
+- name: api_calls
+  description: REST API calls. Included in the subscription at no additional charge; tracked for visibility only, not billed.
+  unit: requests
+  aggregation: sum
+  dimensions:
+  - account
+  - endpoint
+principles:
+- name: Visibility
+  description: Track how many sevdesk accounts exist and which plan tier each is on; API call volume is not billed but is worth monitoring for integration health.
+- name: Allocation
+  description: Map each sevdesk account and its subscription to the owning team, client, or legal entity so the flat fee lands on the right cost center.
+- name: Optimization
+  description: Right-size the plan tier to the features actually used (invoicing vs full accounting vs inventory), consolidate redundant accounts, and choose a 12/24-month term when usage is committed to cut the monthly rate.
+- name: Accountability
+  description: Assign an owner per sevdesk account to review the tier and contract term at renewal against actual usage.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

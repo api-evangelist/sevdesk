@@ -1,0 +1,60 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
+provider: sevdesk
+providerId: sevdesk
+created: '2026-07-12'
+modified: '2026-07-12'
+reconciled: false
+tags:
+- Accounting
+- Invoicing
+- SaaS
+- Rate Limiting
+- Quotas
+description: >-
+  sevdesk does not publish fixed numeric rate limits for its REST API in the
+  official OpenAPI specification or developer documentation. In practice the API
+  is a shared multi-tenant SaaS surface, so clients should assume server-side
+  throttling exists and design defensively - use pagination (limit / offset),
+  request only the fields needed, use the embed parameter to reduce round trips,
+  and back off on throttling responses. Bulk and long-running work (DATEV / CSV
+  exports) is handled asynchronously through export jobs polled at
+  /Progress/getProgress, which naturally spreads load rather than requiring
+  large synchronous requests.
+notes: >-
+  No numeric per-second, per-minute, or per-day request cap is documented as of
+  the review date. Treat the values here as guidance, not published limits, and
+  confirm any current throttling behavior via the sevdesk Tech Blog / API news
+  and support during reconciliation.
+sources:
+- https://api.sevdesk.de/
+- https://tech.sevdesk.com/api_news/
+responseCodes:
+  throttled: 429
+limits:
+- name: REST API Requests
+  scope: account
+  metric: requests
+  limit: not published
+  notes: No fixed numeric request-rate limit is documented for the sevdesk API.
+- name: List Pagination
+  scope: request
+  metric: records
+  limit: configurable via limit / offset
+  notes: List endpoints page results with the limit and offset query parameters.
+- name: Export Jobs
+  scope: account
+  metric: jobs
+  limit: async / progress-tracked
+  notes: DATEV and CSV exports run as jobs polled at /Progress/getProgress instead of large synchronous calls.
+policies:
+- name: Backoff Strategy
+  description: On 429 (or 5xx) responses, back off exponentially with jitter and honor any Retry-After header before retrying.
+- name: Payload Minimization
+  description: Use limit/offset and the embed parameter to fetch only needed records and nested resources, reducing request volume.
+- name: Asynchronous Export
+  description: Prefer the export-job endpoints for bulk data rather than repeatedly paging large synchronous result sets.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com
