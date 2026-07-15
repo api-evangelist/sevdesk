@@ -219,6 +219,8 @@ apis:
     vouchers, transactions, and contacts as CSV/ZIP, and pull invoice, order,
     contact, and voucher report lists.
 common:
+- type: AgenticAccess
+  url: agentic-access/sevdesk-agentic-access.yml
 - type: DomainSecurity
   url: security/sevdesk-domain-security.yml
 - type: Authentication
