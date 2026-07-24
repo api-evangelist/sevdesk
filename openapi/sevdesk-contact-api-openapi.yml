@@ -1,0 +1,234 @@
+openapi: 3.0.3
+info:
+  title: sevdesk CheckAccount Contact API
+  description: 'The sevdesk API is a RESTful interface to the sevdesk cloud accounting and invoicing platform. Every function and every piece of data available in the sevdesk web application can also be driven through this API - contacts, invoices, orders, credit notes, vouchers (receipts), bank check accounts and transactions, parts (inventory), and tags. All requests are authenticated with a per-administrator API token, passed as the value of an `Authorization` header. Nested resources can be pulled in with the `embed` query parameter.
+
+
+    This OpenAPI document is a grounded, representative subset authored by API Evangelist from sevdesk''s official OpenAPI specification (openapi 3.0.0, reported API version 2.0.0, served at https://my.sevdesk.de/api/v1). The paths, HTTP methods, operationIds, and the apiKey security scheme are taken directly from the official specification; request and response schemas here are simplified representations of the far richer official models. See review.yml for confirmed-vs-modeled detail.'
+  version: '1.0'
+  contact:
+    name: sevdesk
+    url: https://api.sevdesk.de/
+servers:
+- url: https://my.sevdesk.de/api/v1
+  description: sevdesk main application instance
+security:
+- api_key: []
+tags:
+- name: Contact
+  description: Contacts - customers, suppliers, and other business partners.
+paths:
+  /Contact:
+    get:
+      operationId: getContacts
+      tags:
+      - Contact
+      summary: Retrieve contacts
+      description: Retrieves a list of contacts, optionally filtered and embedded.
+      parameters:
+      - $ref: '#/components/parameters/Limit'
+      - $ref: '#/components/parameters/Offset'
+      - $ref: '#/components/parameters/Embed'
+      responses:
+        '200':
+          description: A list of contacts.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ObjectList'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    post:
+      operationId: createContact
+      tags:
+      - Contact
+      summary: Create a new contact
+      description: Creates a new contact (organisation or person).
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Contact'
+      responses:
+        '201':
+          description: The created contact.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ObjectResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /Contact/{contactId}:
+    parameters:
+    - $ref: '#/components/parameters/ContactId'
+    get:
+      operationId: getContactById
+      tags:
+      - Contact
+      summary: Find contact by ID
+      description: Retrieves a single contact by its ID.
+      responses:
+        '200':
+          description: The requested contact.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ObjectResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    put:
+      operationId: updateContact
+      tags:
+      - Contact
+      summary: Update a existing contact
+      description: Updates an existing contact.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Contact'
+      responses:
+        '200':
+          description: The updated contact.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ObjectResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    delete:
+      operationId: deleteContact
+      tags:
+      - Contact
+      summary: Deletes a contact
+      description: Deletes a contact.
+      responses:
+        '200':
+          description: Deletion confirmation.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /Contact/Factory/getNextCustomerNumber:
+    get:
+      operationId: getNextCustomerNumber
+      tags:
+      - Contact
+      summary: Get next free customer number
+      description: Returns the next free customer number sevdesk would assign.
+      responses:
+        '200':
+          description: The next free customer number.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ObjectResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+components:
+  parameters:
+    Embed:
+      name: embed
+      in: query
+      required: false
+      description: Comma-separated list of nested resources to embed fully in the response instead of returning only their id and objectName.
+      schema:
+        type: string
+    ContactId:
+      name: contactId
+      in: path
+      required: true
+      description: The ID of the contact.
+      schema:
+        type: integer
+    Limit:
+      name: limit
+      in: query
+      required: false
+      description: Limits the number of entries returned.
+      schema:
+        type: integer
+    Offset:
+      name: offset
+      in: query
+      required: false
+      description: Number of entries to skip for pagination.
+      schema:
+        type: integer
+  responses:
+    Unauthorized:
+      description: Missing or invalid API token.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    ObjectResponse:
+      type: object
+      description: Standard sevdesk single-object envelope.
+      properties:
+        objects:
+          type: object
+          additionalProperties: true
+    Contact:
+      type: object
+      description: A sevdesk contact. Simplified subset of the official model; either name (organisation) or surname/familyname (person) is used together with a category.
+      properties:
+        name:
+          type: string
+          description: Organisation name (for company contacts).
+        surename:
+          type: string
+          description: Given name (for person contacts).
+        familyname:
+          type: string
+          description: Family name (for person contacts).
+        customerNumber:
+          type: string
+        category:
+          type: object
+          description: Contact category reference (id + objectName Category).
+          properties:
+            id:
+              type: integer
+            objectName:
+              type: string
+      required:
+      - category
+    ObjectList:
+      type: object
+      description: Standard sevdesk list envelope. The objects array carries the requested resources.
+      properties:
+        objects:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
+    Error:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            message:
+              type: string
+            code:
+              type: integer
+  securitySchemes:
+    api_key:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: Per-administrator sevdesk API token - a 32-character hexadecimal string found in the sevdesk web app under user settings. Passed as the raw value of the `Authorization` header (no `Bearer` prefix). Tokens have an infinite lifetime.

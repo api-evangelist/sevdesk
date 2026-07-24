@@ -1,0 +1,111 @@
+openapi: 3.0.3
+info:
+  title: sevdesk CheckAccount API
+  description: 'The sevdesk API is a RESTful interface to the sevdesk cloud accounting and invoicing platform. Every function and every piece of data available in the sevdesk web application can also be driven through this API - contacts, invoices, orders, credit notes, vouchers (receipts), bank check accounts and transactions, parts (inventory), and tags. All requests are authenticated with a per-administrator API token, passed as the value of an `Authorization` header. Nested resources can be pulled in with the `embed` query parameter.
+
+
+    This OpenAPI document is a grounded, representative subset authored by API Evangelist from sevdesk''s official OpenAPI specification (openapi 3.0.0, reported API version 2.0.0, served at https://my.sevdesk.de/api/v1). The paths, HTTP methods, operationIds, and the apiKey security scheme are taken directly from the official specification; request and response schemas here are simplified representations of the far richer official models. See review.yml for confirmed-vs-modeled detail.'
+  version: '1.0'
+  contact:
+    name: sevdesk
+    url: https://api.sevdesk.de/
+servers:
+- url: https://my.sevdesk.de/api/v1
+  description: sevdesk main application instance
+security:
+- api_key: []
+tags:
+- name: CheckAccount
+  description: Bank and clearing check accounts.
+paths:
+  /CheckAccount:
+    get:
+      operationId: getCheckAccounts
+      tags:
+      - CheckAccount
+      summary: Retrieve check accounts
+      description: Retrieves the list of bank and clearing check accounts.
+      responses:
+        '200':
+          description: A list of check accounts.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ObjectList'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /CheckAccount/{checkAccountId}:
+    parameters:
+    - $ref: '#/components/parameters/CheckAccountId'
+    get:
+      operationId: getCheckAccountById
+      tags:
+      - CheckAccount
+      summary: Find check account by ID
+      description: Retrieves a single check account by its ID.
+      responses:
+        '200':
+          description: The requested check account.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ObjectResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+components:
+  parameters:
+    CheckAccountId:
+      name: checkAccountId
+      in: path
+      required: true
+      description: The ID of the check account.
+      schema:
+        type: integer
+  responses:
+    Unauthorized:
+      description: Missing or invalid API token.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    ObjectResponse:
+      type: object
+      description: Standard sevdesk single-object envelope.
+      properties:
+        objects:
+          type: object
+          additionalProperties: true
+    ObjectList:
+      type: object
+      description: Standard sevdesk list envelope. The objects array carries the requested resources.
+      properties:
+        objects:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
+    Error:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            message:
+              type: string
+            code:
+              type: integer
+  securitySchemes:
+    api_key:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: Per-administrator sevdesk API token - a 32-character hexadecimal string found in the sevdesk web app under user settings. Passed as the raw value of the `Authorization` header (no `Bearer` prefix). Tokens have an infinite lifetime.
