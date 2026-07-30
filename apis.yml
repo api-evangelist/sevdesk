@@ -10,7 +10,20 @@ description: sevdesk is a German cloud accounting, invoicing, and bookkeeping
   exports - authenticated with a per-administrator API token passed in the
   Authorization header. Nested resources can be pulled in with the embed query
   parameter.
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: freemium
+  onboarding: self-serve
+  trial: true
+  try_now: true
+  public: false
+  label: Freemium (free trial) · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/sevdesk.png
 tags:
 - Accounting
 - Invoicing
@@ -26,198 +39,168 @@ created: '2026-07-12'
 modified: '2026-07-12'
 specificationVersion: '0.19'
 apis:
-- aid: sevdesk:sevdesk-contacts-api
-  name: sevdesk Contacts API
-  tags:
-  - Contacts
-  - Customers
-  - CRM
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+- aid: sevdesk:sevdesk-checkaccount-api
+  name: sevdesk CheckAccount API
+  description: Bank and clearing check accounts.
   humanURL: https://api.sevdesk.de/
   baseURL: https://my.sevdesk.de/api/v1
-  properties:
-  - url: https://api.sevdesk.de/
-    type: Documentation
-  - url: https://api.sevdesk.de/
-    type: APIReference
-  - url: openapi/sevdesk-openapi.yml
-    type: OpenAPI
-  - url: collections/sevdesk.postman_collection.json
-    type: PostmanCollection
-  - url: collections/sevdesk.opencollection.json
-    type: OpenCollection
-  description: Create, retrieve, update, and delete contacts - customers,
-    suppliers, and partners - along with helpers such as the next free customer
-    number. Contact addresses and communication ways attach to each contact.
-- aid: sevdesk:sevdesk-invoices-api
-  name: sevdesk Invoices API
   tags:
-  - Invoices
-  - Billing
-  - PDF
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  - CheckAccount
+  properties:
+  - type: OpenAPI
+    url: openapi/sevdesk-checkaccount-api-openapi.yml
+  - type: Documentation
+    url: https://api.sevdesk.de/
+  - type: APIReference
+    url: https://api.sevdesk.de/
+  - type: PostmanCollection
+    url: collections/sevdesk.postman_collection.json
+  - type: OpenCollection
+    url: collections/sevdesk.opencollection.json
+- aid: sevdesk:sevdesk-checkaccounttransaction-api
+  name: sevdesk CheckAccountTransaction API
+  description: Transactions booked against a check account.
   humanURL: https://api.sevdesk.de/
   baseURL: https://my.sevdesk.de/api/v1
-  properties:
-  - url: https://api.sevdesk.de/
-    type: Documentation
-  - url: openapi/sevdesk-openapi.yml
-    type: OpenAPI
-  - url: collections/sevdesk.postman_collection.json
-    type: PostmanCollection
-  - url: collections/sevdesk.opencollection.json
-    type: OpenCollection
-  description: Create invoices with their positions via the saveInvoice factory,
-    list and retrieve invoices, render and download the PDF, fetch e-invoice XML,
-    send invoices by email, and drive the invoice lifecycle (book, enshrine,
-    cancel, reset).
-- aid: sevdesk:sevdesk-orders-api
-  name: sevdesk Orders API
   tags:
-  - Orders
-  - Quotations
-  - Sales
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  - CheckAccountTransaction
+  properties:
+  - type: OpenAPI
+    url: openapi/sevdesk-checkaccounttransaction-api-openapi.yml
+  - type: Documentation
+    url: https://api.sevdesk.de/
+  - type: APIReference
+    url: https://api.sevdesk.de/
+  - type: PostmanCollection
+    url: collections/sevdesk.postman_collection.json
+  - type: OpenCollection
+    url: collections/sevdesk.opencollection.json
+- aid: sevdesk:sevdesk-contact-api
+  name: sevdesk Contact API
+  description: Contacts - customers, suppliers, and other business partners.
   humanURL: https://api.sevdesk.de/
   baseURL: https://my.sevdesk.de/api/v1
-  properties:
-  - url: https://api.sevdesk.de/
-    type: Documentation
-  - url: openapi/sevdesk-openapi.yml
-    type: OpenAPI
-  - url: collections/sevdesk.postman_collection.json
-    type: PostmanCollection
-  - url: collections/sevdesk.opencollection.json
-    type: OpenCollection
-  description: Manage orders and quotations - create with positions via the
-    saveOrder factory, list, retrieve, update, and delete, fetch positions and
-    discounts, generate packing lists or contract notes, and send orders by email.
-- aid: sevdesk:sevdesk-credit-notes-api
-  name: sevdesk Credit Notes API
   tags:
-  - Credit Notes
-  - Refunds
-  - Accounting
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  - Contact
+  properties:
+  - type: OpenAPI
+    url: openapi/sevdesk-contact-api-openapi.yml
+  - type: Documentation
+    url: https://api.sevdesk.de/
+  - type: APIReference
+    url: https://api.sevdesk.de/
+  - type: PostmanCollection
+    url: collections/sevdesk.postman_collection.json
+  - type: OpenCollection
+    url: collections/sevdesk.opencollection.json
+- aid: sevdesk:sevdesk-creditnote-api
+  name: sevdesk CreditNote API
+  description: Credit notes issued to contacts.
   humanURL: https://api.sevdesk.de/
   baseURL: https://my.sevdesk.de/api/v1
-  properties:
-  - url: https://api.sevdesk.de/
-    type: Documentation
-  - url: openapi/sevdesk-openapi.yml
-    type: OpenAPI
-  - url: collections/sevdesk.postman_collection.json
-    type: PostmanCollection
-  - url: collections/sevdesk.opencollection.json
-    type: OpenCollection
-  description: Issue credit notes with the saveCreditNote factory or derive them
-    from an existing invoice or voucher, then list, retrieve, render the PDF, send
-    by email, book, and enshrine them.
-- aid: sevdesk:sevdesk-vouchers-api
-  name: sevdesk Vouchers API
   tags:
-  - Vouchers
-  - Receipts
-  - Bookkeeping
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  - CreditNote
+  properties:
+  - type: OpenAPI
+    url: openapi/sevdesk-creditnote-api-openapi.yml
+  - type: Documentation
+    url: https://api.sevdesk.de/
+  - type: APIReference
+    url: https://api.sevdesk.de/
+  - type: PostmanCollection
+    url: collections/sevdesk.postman_collection.json
+  - type: OpenCollection
+    url: collections/sevdesk.opencollection.json
+- aid: sevdesk:sevdesk-invoice-api
+  name: sevdesk Invoice API
+  description: Outgoing invoices and their lifecycle.
   humanURL: https://api.sevdesk.de/
   baseURL: https://my.sevdesk.de/api/v1
-  properties:
-  - url: https://api.sevdesk.de/
-    type: Documentation
-  - url: openapi/sevdesk-openapi.yml
-    type: OpenAPI
-  - url: collections/sevdesk.postman_collection.json
-    type: PostmanCollection
-  - url: collections/sevdesk.opencollection.json
-    type: OpenCollection
-  description: Book expense and revenue vouchers (receipts) - upload the receipt
-    file, create the voucher with positions via saveVoucher, retrieve and update
-    vouchers, and use receipt-guidance helpers to pick the correct booking account.
-- aid: sevdesk:sevdesk-bank-transactions-api
-  name: sevdesk Bank and Transactions API
   tags:
-  - Banking
-  - Transactions
-  - Reconciliation
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  - Invoice
+  properties:
+  - type: OpenAPI
+    url: openapi/sevdesk-invoice-api-openapi.yml
+  - type: Documentation
+    url: https://api.sevdesk.de/
+  - type: APIReference
+    url: https://api.sevdesk.de/
+  - type: PostmanCollection
+    url: collections/sevdesk.postman_collection.json
+  - type: OpenCollection
+    url: collections/sevdesk.opencollection.json
+- aid: sevdesk:sevdesk-order-api
+  name: sevdesk Order API
+  description: Orders, quotations, and packing lists.
   humanURL: https://api.sevdesk.de/
   baseURL: https://my.sevdesk.de/api/v1
-  properties:
-  - url: https://api.sevdesk.de/
-    type: Documentation
-  - url: openapi/sevdesk-openapi.yml
-    type: OpenAPI
-  - url: collections/sevdesk.postman_collection.json
-    type: PostmanCollection
-  - url: collections/sevdesk.opencollection.json
-    type: OpenCollection
-  description: Manage bank and clearing check accounts and the transactions booked
-    against them - list and create accounts, import and create transactions, fetch
-    account balance at a date, and enshrine transactions for audit safety.
-- aid: sevdesk:sevdesk-parts-api
-  name: sevdesk Parts API
   tags:
-  - Parts
-  - Inventory
-  - Catalog
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  - Order
+  properties:
+  - type: OpenAPI
+    url: openapi/sevdesk-order-api-openapi.yml
+  - type: Documentation
+    url: https://api.sevdesk.de/
+  - type: APIReference
+    url: https://api.sevdesk.de/
+  - type: PostmanCollection
+    url: collections/sevdesk.postman_collection.json
+  - type: OpenCollection
+    url: collections/sevdesk.opencollection.json
+- aid: sevdesk:sevdesk-part-api
+  name: sevdesk Part API
+  description: Parts / articles with stock (inventory).
   humanURL: https://api.sevdesk.de/
   baseURL: https://my.sevdesk.de/api/v1
-  properties:
-  - url: https://api.sevdesk.de/
-    type: Documentation
-  - url: openapi/sevdesk-openapi.yml
-    type: OpenAPI
-  - url: collections/sevdesk.postman_collection.json
-    type: PostmanCollection
-  - url: collections/sevdesk.opencollection.json
-    type: OpenCollection
-  description: Manage parts / articles used on invoices and orders - create, list,
-    retrieve, and update parts, and read current stock levels for inventory-aware
-    workflows.
-- aid: sevdesk:sevdesk-tags-api
-  name: sevdesk Tags API
   tags:
-  - Tags
-  - Labels
-  - Organization
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  - Part
+  properties:
+  - type: OpenAPI
+    url: openapi/sevdesk-part-api-openapi.yml
+  - type: Documentation
+    url: https://api.sevdesk.de/
+  - type: APIReference
+    url: https://api.sevdesk.de/
+  - type: PostmanCollection
+    url: collections/sevdesk.postman_collection.json
+  - type: OpenCollection
+    url: collections/sevdesk.opencollection.json
+- aid: sevdesk:sevdesk-tag-api
+  name: sevdesk Tag API
+  description: Tags and tag relations used to label resources.
   humanURL: https://api.sevdesk.de/
   baseURL: https://my.sevdesk.de/api/v1
-  properties:
-  - url: https://api.sevdesk.de/
-    type: Documentation
-  - url: openapi/sevdesk-openapi.yml
-    type: OpenAPI
-  - url: collections/sevdesk.postman_collection.json
-    type: PostmanCollection
-  - url: collections/sevdesk.opencollection.json
-    type: OpenCollection
-  description: Create tags and relate them to resources, then list, retrieve,
-    update, and delete tags and inspect tag relations across the account.
-- aid: sevdesk:sevdesk-export-reports-api
-  name: sevdesk Export and Reports API
   tags:
-  - Export
-  - DATEV
-  - Reports
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  - Tag
+  properties:
+  - type: OpenAPI
+    url: openapi/sevdesk-tag-api-openapi.yml
+  - type: Documentation
+    url: https://api.sevdesk.de/
+  - type: APIReference
+    url: https://api.sevdesk.de/
+  - type: PostmanCollection
+    url: collections/sevdesk.postman_collection.json
+  - type: OpenCollection
+    url: collections/sevdesk.opencollection.json
+- aid: sevdesk:sevdesk-voucher-api
+  name: sevdesk Voucher API
+  description: Vouchers (receipts) used for expense and revenue bookkeeping.
   humanURL: https://api.sevdesk.de/
   baseURL: https://my.sevdesk.de/api/v1
+  tags:
+  - Voucher
   properties:
-  - url: https://api.sevdesk.de/
-    type: Documentation
-  - url: openapi/sevdesk-openapi.yml
-    type: OpenAPI
-  - url: collections/sevdesk.postman_collection.json
-    type: PostmanCollection
-  - url: collections/sevdesk.opencollection.json
-    type: OpenCollection
-  description: Export accounting data for the tax advisor - start DATEV CSV/XML ZIP
-    export jobs, track progress and download, export invoices, credit notes,
-    vouchers, transactions, and contacts as CSV/ZIP, and pull invoice, order,
-    contact, and voucher report lists.
+  - type: OpenAPI
+    url: openapi/sevdesk-voucher-api-openapi.yml
+  - type: Documentation
+    url: https://api.sevdesk.de/
+  - type: APIReference
+    url: https://api.sevdesk.de/
+  - type: PostmanCollection
+    url: collections/sevdesk.postman_collection.json
+  - type: OpenCollection
+    url: collections/sevdesk.opencollection.json
 common:
 - type: AgenticAccess
   url: agentic-access/sevdesk-agentic-access.yml
