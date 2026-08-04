@@ -1,0 +1,21 @@
+{
+  "repo": "sevdesk",
+  "feeds": [
+    {
+      "source": "https://tech.sevdesk.com/index.xml",
+      "feed_url": "https://tech.sevdesk.com/index.xml",
+      "title": "",
+      "saved": 0,
+      "method": "feed"
+    },
+    {
+      "source": "https://tech.sevdesk.com/",
+      "feed_url": "https://tech.sevdesk.com/index.xml",
+      "title": "",
+      "saved": 0,
+      "method": "discovered"
+    }
+  ],
+  "post_count": 29,
+  "fetched": "2026-08-01T15:49:00Z"
+}

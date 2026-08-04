@@ -1,0 +1,30 @@
+{
+  "provider": "sevdesk",
+  "sources": [
+    "sevdesk-checkaccount-api-openapi.yml",
+    "sevdesk-checkaccounttransaction-api-openapi.yml",
+    "sevdesk-contact-api-openapi.yml",
+    "sevdesk-creditnote-api-openapi.yml",
+    "sevdesk-invoice-api-openapi.yml",
+    "sevdesk-order-api-openapi.yml",
+    "sevdesk-part-api-openapi.yml",
+    "sevdesk-tag-api-openapi.yml",
+    "sevdesk-voucher-api-openapi.yml"
+  ],
+  "outputs": [
+    "sevdesk-checkaccount-api-openapi.yml",
+    "sevdesk-checkaccounttransaction-api-openapi.yml",
+    "sevdesk-contact-api-openapi.yml",
+    "sevdesk-creditnote-api-openapi.yml",
+    "sevdesk-invoice-api-openapi.yml",
+    "sevdesk-order-api-openapi.yml",
+    "sevdesk-part-api-openapi.yml",
+    "sevdesk-tag-api-openapi.yml",
+    "sevdesk-voucher-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
