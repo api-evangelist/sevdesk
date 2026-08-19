@@ -1,0 +1,85 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "sevdesk CheckAccount Part API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Part",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve parts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://my.sevdesk.de/api/v1/Part",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Limits the number of entries returned."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of entries to skip for pagination."
+              }
+            ]
+          },
+          "docs": "Retrieves a list of parts / articles."
+        },
+        {
+          "info": {
+            "name": "Create a new part",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://my.sevdesk.de/api/v1/Part",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new part / article."
+        },
+        {
+          "info": {
+            "name": "Get stock of a part",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://my.sevdesk.de/api/v1/Part/:partId/getStock",
+            "params": [
+              {
+                "name": "partId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the part."
+              }
+            ]
+          },
+          "docs": "Returns the current stock quantity of a part."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

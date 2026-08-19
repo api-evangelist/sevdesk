@@ -1,0 +1,144 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "sevdesk CheckAccount Contact API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Contact",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve contacts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://my.sevdesk.de/api/v1/Contact",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Limits the number of entries returned."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of entries to skip for pagination."
+              },
+              {
+                "name": "embed",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of nested resources to embed fully in the response instead of returning only their id and objectName."
+              }
+            ]
+          },
+          "docs": "Retrieves a list of contacts, optionally filtered and embedded."
+        },
+        {
+          "info": {
+            "name": "Create a new contact",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://my.sevdesk.de/api/v1/Contact",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new contact (organisation or person)."
+        },
+        {
+          "info": {
+            "name": "Find contact by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://my.sevdesk.de/api/v1/Contact/:contactId",
+            "params": [
+              {
+                "name": "contactId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the contact."
+              }
+            ]
+          },
+          "docs": "Retrieves a single contact by its ID."
+        },
+        {
+          "info": {
+            "name": "Update a existing contact",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://my.sevdesk.de/api/v1/Contact/:contactId",
+            "params": [
+              {
+                "name": "contactId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the contact."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an existing contact."
+        },
+        {
+          "info": {
+            "name": "Deletes a contact",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://my.sevdesk.de/api/v1/Contact/:contactId",
+            "params": [
+              {
+                "name": "contactId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the contact."
+              }
+            ]
+          },
+          "docs": "Deletes a contact."
+        },
+        {
+          "info": {
+            "name": "Get next free customer number",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://my.sevdesk.de/api/v1/Contact/Factory/getNextCustomerNumber"
+          },
+          "docs": "Returns the next free customer number sevdesk would assign."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

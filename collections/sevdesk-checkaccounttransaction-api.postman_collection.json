@@ -1,0 +1,351 @@
+{
+  "item": [
+    {
+      "id": "03e6e776-5c2c-4a92-94fb-f37ac08d9b60",
+      "name": "CheckAccountTransaction",
+      "description": {
+        "content": "Transactions booked against a check account.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "fc72bc6f-7838-4921-91ba-94b2820efbaf",
+          "name": "Retrieve transactions",
+          "request": {
+            "name": "Retrieve transactions",
+            "description": {
+              "content": "Retrieves transactions booked against check accounts.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "CheckAccountTransaction"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Limits the number of entries returned."
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "Number of entries to skip for pagination."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "96738fd5-3b6d-4318-9d52-3315911d872b",
+              "name": "A list of transactions.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "CheckAccountTransaction"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"objects\": [\n    {\n      \"key_0\": \"string\",\n      \"key_1\": 6727.753163103679,\n      \"key_2\": 9275.954890419556\n    },\n    {\n      \"key_0\": \"string\",\n      \"key_1\": true\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5430cd76-297e-40f3-b569-96d73d13a6af",
+              "name": "Missing or invalid API token.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "CheckAccountTransaction"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"message\": \"string\",\n    \"code\": 3467\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c469a7b1-cbc1-48a0-8235-249c438b66f1",
+          "name": "Create a new transaction",
+          "request": {
+            "name": "Create a new transaction",
+            "description": {
+              "content": "Creates a new check account transaction.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "CheckAccountTransaction"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"key_0\": false,\n  \"key_1\": 5174.658646467989,\n  \"key_2\": \"string\",\n  \"key_3\": true\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "c73a030d-bdc1-444f-a078-acf7147cb7ce",
+              "name": "The created transaction.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "CheckAccountTransaction"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"key_0\": false,\n  \"key_1\": 4372,\n  \"key_2\": 4998,\n  \"key_3\": 4222\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"objects\": {\n    \"key_0\": 188.80764105210778,\n    \"key_1\": 9919.44098251564\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a0d33555-2433-4961-ad36-e8208986d120",
+              "name": "Missing or invalid API token.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "CheckAccountTransaction"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"key_0\": false,\n  \"key_1\": 4372,\n  \"key_2\": 4998,\n  \"key_3\": 4222\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"message\": \"string\",\n    \"code\": 3467\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://my.sevdesk.de/api/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "c4b4c987-38f4-44cb-ba81-1126fe00b291",
+    "name": "sevdesk CheckAccount CheckAccountTransaction API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The sevdesk API is a RESTful interface to the sevdesk cloud accounting and invoicing platform. Every function and every piece of data available in the sevdesk web application can also be driven through this API - contacts, invoices, orders, credit notes, vouchers (receipts), bank check accounts and transactions, parts (inventory), and tags. All requests are authenticated with a per-administrator API token, passed as the value of an `Authorization` header. Nested resources can be pulled in with the `embed` query parameter.\n\nThis OpenAPI document is a grounded, representative subset authored by API Evangelist from sevdesk's official OpenAPI specification (openapi 3.0.0, reported API version 2.0.0, served at https://my.sevdesk.de/api/v1). The paths, HTTP methods, operationIds, and the apiKey security scheme are taken directly from the official specification; request and response schemas here are simplified representations of the far richer official models. See review.yml for confirmed-vs-modeled detail.\n\nContact Support:\n Name: sevdesk",
+      "type": "text/plain"
+    }
+  }
+}

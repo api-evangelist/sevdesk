@@ -1,0 +1,326 @@
+{
+  "item": [
+    {
+      "id": "e1964f25-846c-49cf-bd2e-de9290223934",
+      "name": "Tag",
+      "description": {
+        "content": "Tags and tag relations used to label resources.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "a900c343-b2f8-4537-bd9b-4fe3ee39df74",
+          "name": "Retrieve tags",
+          "request": {
+            "name": "Retrieve tags",
+            "description": {
+              "content": "Retrieves the list of tags.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Tag"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a23dd7f3-437a-4536-a27d-9944b1cdfb31",
+              "name": "A list of tags.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Tag"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"objects\": [\n    {\n      \"key_0\": 7707\n    },\n    {\n      \"key_0\": 5246\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "56b8f64f-8338-433b-8c98-3ef88607cc79",
+              "name": "Missing or invalid API token.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Tag"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"message\": \"string\",\n    \"code\": 9746\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "18f0e9cd-cfca-4d7b-a771-0046a1820412",
+          "name": "Create a new tag",
+          "request": {
+            "name": "Create a new tag",
+            "description": {
+              "content": "Creates a new tag and relates it to an object.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Tag",
+                "Factory",
+                "create"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"objectType\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "b5aa6f21-ff8f-433b-bd16-1e03891d8340",
+              "name": "The created tag.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Tag",
+                    "Factory",
+                    "create"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"objectType\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"objects\": {\n    \"key_0\": 1874.8219523059884\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9e97092c-74eb-446c-b73c-bd4588780c67",
+              "name": "Missing or invalid API token.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Tag",
+                    "Factory",
+                    "create"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"objectType\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"message\": \"string\",\n    \"code\": 9746\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://my.sevdesk.de/api/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "02a1a502-d7e4-4ab3-9cb9-9a89c097490a",
+    "name": "sevdesk CheckAccount Tag API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The sevdesk API is a RESTful interface to the sevdesk cloud accounting and invoicing platform. Every function and every piece of data available in the sevdesk web application can also be driven through this API - contacts, invoices, orders, credit notes, vouchers (receipts), bank check accounts and transactions, parts (inventory), and tags. All requests are authenticated with a per-administrator API token, passed as the value of an `Authorization` header. Nested resources can be pulled in with the `embed` query parameter.\n\nThis OpenAPI document is a grounded, representative subset authored by API Evangelist from sevdesk's official OpenAPI specification (openapi 3.0.0, reported API version 2.0.0, served at https://my.sevdesk.de/api/v1). The paths, HTTP methods, operationIds, and the apiKey security scheme are taken directly from the official specification; request and response schemas here are simplified representations of the far richer official models. See review.yml for confirmed-vs-modeled detail.\n\nContact Support:\n Name: sevdesk",
+      "type": "text/plain"
+    }
+  }
+}

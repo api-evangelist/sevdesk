@@ -1,0 +1,66 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "sevdesk CheckAccount CheckAccountTransaction API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "CheckAccountTransaction",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve transactions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://my.sevdesk.de/api/v1/CheckAccountTransaction",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Limits the number of entries returned."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of entries to skip for pagination."
+              }
+            ]
+          },
+          "docs": "Retrieves transactions booked against check accounts."
+        },
+        {
+          "info": {
+            "name": "Create a new transaction",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://my.sevdesk.de/api/v1/CheckAccountTransaction",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new check account transaction."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

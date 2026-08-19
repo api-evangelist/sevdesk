@@ -1,0 +1,133 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "sevdesk CheckAccount Order API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Order",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve orders",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://my.sevdesk.de/api/v1/Order",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Limits the number of entries returned."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of entries to skip for pagination."
+              },
+              {
+                "name": "embed",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of nested resources to embed fully in the response instead of returning only their id and objectName."
+              }
+            ]
+          },
+          "docs": "Retrieves a list of orders (quotations, order confirmations)."
+        },
+        {
+          "info": {
+            "name": "Create a new order",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://my.sevdesk.de/api/v1/Order/Factory/saveOrder",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new order together with its positions."
+        },
+        {
+          "info": {
+            "name": "Find order by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://my.sevdesk.de/api/v1/Order/:orderId",
+            "params": [
+              {
+                "name": "orderId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the order."
+              }
+            ]
+          },
+          "docs": "Retrieves a single order by its ID."
+        },
+        {
+          "info": {
+            "name": "Update an existing order",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://my.sevdesk.de/api/v1/Order/:orderId",
+            "params": [
+              {
+                "name": "orderId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the order."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an existing order."
+        },
+        {
+          "info": {
+            "name": "Deletes an order",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://my.sevdesk.de/api/v1/Order/:orderId",
+            "params": [
+              {
+                "name": "orderId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the order."
+              }
+            ]
+          },
+          "docs": "Deletes an order."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

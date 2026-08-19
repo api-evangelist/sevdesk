@@ -1,0 +1,56 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "sevdesk CheckAccount API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "CheckAccount",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve check accounts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://my.sevdesk.de/api/v1/CheckAccount"
+          },
+          "docs": "Retrieves the list of bank and clearing check accounts."
+        },
+        {
+          "info": {
+            "name": "Find check account by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://my.sevdesk.de/api/v1/CheckAccount/:checkAccountId",
+            "params": [
+              {
+                "name": "checkAccountId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the check account."
+              }
+            ]
+          },
+          "docs": "Retrieves a single check account by its ID."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

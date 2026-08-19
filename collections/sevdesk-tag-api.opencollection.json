@@ -1,0 +1,52 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "sevdesk CheckAccount Tag API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Tag",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve tags",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://my.sevdesk.de/api/v1/Tag"
+          },
+          "docs": "Retrieves the list of tags."
+        },
+        {
+          "info": {
+            "name": "Create a new tag",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://my.sevdesk.de/api/v1/Tag/Factory/create",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new tag and relates it to an object."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

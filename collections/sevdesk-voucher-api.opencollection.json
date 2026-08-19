@@ -1,0 +1,91 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "sevdesk CheckAccount Voucher API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Voucher",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve vouchers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://my.sevdesk.de/api/v1/Voucher",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Limits the number of entries returned."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of entries to skip for pagination."
+              },
+              {
+                "name": "embed",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of nested resources to embed fully in the response instead of returning only their id and objectName."
+              }
+            ]
+          },
+          "docs": "Retrieves a list of vouchers (receipts)."
+        },
+        {
+          "info": {
+            "name": "Create a new voucher",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://my.sevdesk.de/api/v1/Voucher/Factory/saveVoucher",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new voucher together with its positions."
+        },
+        {
+          "info": {
+            "name": "Find voucher by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://my.sevdesk.de/api/v1/Voucher/:voucherId",
+            "params": [
+              {
+                "name": "voucherId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the voucher."
+              }
+            ]
+          },
+          "docs": "Retrieves a single voucher by its ID."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

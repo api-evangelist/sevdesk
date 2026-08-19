@@ -1,0 +1,72 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "sevdesk CheckAccount CreditNote API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "CreditNote",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve CreditNote",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://my.sevdesk.de/api/v1/CreditNote",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Limits the number of entries returned."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of entries to skip for pagination."
+              },
+              {
+                "name": "embed",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of nested resources to embed fully in the response instead of returning only their id and objectName."
+              }
+            ]
+          },
+          "docs": "Retrieves a list of credit notes."
+        },
+        {
+          "info": {
+            "name": "Create a new creditNote",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://my.sevdesk.de/api/v1/CreditNote/Factory/saveCreditNote",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new credit note together with its positions."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
