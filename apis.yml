@@ -10,6 +10,18 @@ description: sevdesk is a German cloud accounting, invoicing, and bookkeeping
   exports - authenticated with a per-administrator API token passed in the
   Authorization header. Nested resources can be pulled in with the embed query
   parameter.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: freemium
   onboarding: self-serve
