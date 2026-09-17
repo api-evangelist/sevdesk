@@ -116,24 +116,6 @@ apis:
     url: collections/sevdesk.postman_collection.json
   - type: OpenCollection
     url: collections/sevdesk.opencollection.json
-- aid: sevdesk:sevdesk-creditnote-api
-  name: sevdesk CreditNote API
-  description: Credit notes issued to contacts.
-  humanURL: https://api.sevdesk.de/
-  baseURL: https://my.sevdesk.de/api/v1
-  tags:
-  - CreditNote
-  properties:
-  - type: OpenAPI
-    url: openapi/sevdesk-creditnote-api-openapi.yml
-  - type: Documentation
-    url: https://api.sevdesk.de/
-  - type: APIReference
-    url: https://api.sevdesk.de/
-  - type: PostmanCollection
-    url: collections/sevdesk.postman_collection.json
-  - type: OpenCollection
-    url: collections/sevdesk.opencollection.json
 - aid: sevdesk:sevdesk-invoice-api
   name: sevdesk Invoice API
   description: Outgoing invoices and their lifecycle.
@@ -216,6 +198,24 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/sevdesk-voucher-api-openapi.yml
+  - type: Documentation
+    url: https://api.sevdesk.de/
+  - type: APIReference
+    url: https://api.sevdesk.de/
+  - type: PostmanCollection
+    url: collections/sevdesk.postman_collection.json
+  - type: OpenCollection
+    url: collections/sevdesk.opencollection.json
+- aid: sevdesk:sevdesk-credit-note-api
+  name: sevdesk Credit Note API
+  description: Credit notes issued to contacts.
+  humanURL: https://api.sevdesk.de/
+  baseURL: https://my.sevdesk.de/api/v1
+  tags:
+  - Credit Note
+  properties:
+  - type: OpenAPI
+    url: openapi/sevdesk-credit-note-api-openapi.yml
   - type: Documentation
     url: https://api.sevdesk.de/
   - type: APIReference
