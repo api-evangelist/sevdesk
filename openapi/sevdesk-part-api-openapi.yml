@@ -1,10 +1,7 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: sevdesk CheckAccount Part API
-  description: 'The sevdesk API is a RESTful interface to the sevdesk cloud accounting and invoicing platform. Every function and every piece of data available in the sevdesk web application can also be driven through this API - contacts, invoices, orders, credit notes, vouchers (receipts), bank check accounts and transactions, parts (inventory), and tags. All requests are authenticated with a per-administrator API token, passed as the value of an `Authorization` header. Nested resources can be pulled in with the `embed` query parameter.
-
-
-    This OpenAPI document is a grounded, representative subset authored by API Evangelist from sevdesk''s official OpenAPI specification (openapi 3.0.0, reported API version 2.0.0, served at https://my.sevdesk.de/api/v1). The paths, HTTP methods, operationIds, and the apiKey security scheme are taken directly from the official specification; request and response schemas here are simplified representations of the far richer official models. See review.yml for confirmed-vs-modeled detail.'
+  title: sevdesk Part API
+  description: The sevdesk API is a RESTful interface to the sevdesk cloud accounting and invoicing platform.
   version: '1.0'
   contact:
     name: sevdesk
@@ -80,18 +77,18 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   parameters:
-    PartId:
-      name: partId
-      in: path
-      required: true
-      description: The ID of the part.
-      schema:
-        type: integer
     Limit:
       name: limit
       in: query
       required: false
       description: Limits the number of entries returned.
+      schema:
+        type: integer
+    PartId:
+      name: partId
+      in: path
+      required: true
+      description: The ID of the part.
       schema:
         type: integer
     Offset:
@@ -102,26 +99,19 @@ components:
       schema:
         type: integer
   responses:
-    Unauthorized:
-      description: Missing or invalid API token.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
     NotFound:
       description: The requested resource was not found.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Missing or invalid API token.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
-    ObjectResponse:
-      type: object
-      description: Standard sevdesk single-object envelope.
-      properties:
-        objects:
-          type: object
-          additionalProperties: true
     Error:
       type: object
       properties:
@@ -132,15 +122,6 @@ components:
               type: string
             code:
               type: integer
-    ObjectList:
-      type: object
-      description: Standard sevdesk list envelope. The objects array carries the requested resources.
-      properties:
-        objects:
-          type: array
-          items:
-            type: object
-            additionalProperties: true
     Part:
       type: object
       description: A part / article with pricing and stock.
@@ -165,6 +146,22 @@ components:
       - name
       - partNumber
       - unity
+    ObjectResponse:
+      type: object
+      description: Standard sevdesk single-object envelope.
+      properties:
+        objects:
+          type: object
+          additionalProperties: true
+    ObjectList:
+      type: object
+      description: Standard sevdesk list envelope. The objects array carries the requested resources.
+      properties:
+        objects:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
   securitySchemes:
     api_key:
       type: apiKey

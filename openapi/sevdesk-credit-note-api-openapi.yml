@@ -1,10 +1,7 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: sevdesk CheckAccount CreditNote API
-  description: 'The sevdesk API is a RESTful interface to the sevdesk cloud accounting and invoicing platform. Every function and every piece of data available in the sevdesk web application can also be driven through this API - contacts, invoices, orders, credit notes, vouchers (receipts), bank check accounts and transactions, parts (inventory), and tags. All requests are authenticated with a per-administrator API token, passed as the value of an `Authorization` header. Nested resources can be pulled in with the `embed` query parameter.
-
-
-    This OpenAPI document is a grounded, representative subset authored by API Evangelist from sevdesk''s official OpenAPI specification (openapi 3.0.0, reported API version 2.0.0, served at https://my.sevdesk.de/api/v1). The paths, HTTP methods, operationIds, and the apiKey security scheme are taken directly from the official specification; request and response schemas here are simplified representations of the far richer official models. See review.yml for confirmed-vs-modeled detail.'
+  title: sevdesk Credit Note API
+  description: The sevdesk API is a RESTful interface to the sevdesk cloud accounting and invoicing platform.
   version: '1.0'
   contact:
     name: sevdesk
@@ -15,14 +12,14 @@ servers:
 security:
 - api_key: []
 tags:
-- name: CreditNote
+- name: Credit Note
   description: Credit notes issued to contacts.
 paths:
   /CreditNote:
     get:
       operationId: getCreditNotes
       tags:
-      - CreditNote
+      - Credit Note
       summary: Retrieve CreditNote
       description: Retrieves a list of credit notes.
       parameters:
@@ -42,7 +39,7 @@ paths:
     post:
       operationId: createcreditNote
       tags:
-      - CreditNote
+      - Credit Note
       summary: Create a new creditNote
       description: Creates a new credit note together with its positions.
       requestBody:
@@ -63,13 +60,6 @@ paths:
           $ref: '#/components/responses/Unauthorized'
 components:
   parameters:
-    Embed:
-      name: embed
-      in: query
-      required: false
-      description: Comma-separated list of nested resources to embed fully in the response instead of returning only their id and objectName.
-      schema:
-        type: string
     Limit:
       name: limit
       in: query
@@ -84,21 +74,14 @@ components:
       description: Number of entries to skip for pagination.
       schema:
         type: integer
-  responses:
-    Unauthorized:
-      description: Missing or invalid API token.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
+    Embed:
+      name: embed
+      in: query
+      required: false
+      description: Comma-separated list of nested resources to embed fully in the response instead of returning only their id and objectName.
+      schema:
+        type: string
   schemas:
-    ObjectResponse:
-      type: object
-      description: Standard sevdesk single-object envelope.
-      properties:
-        objects:
-          type: object
-          additionalProperties: true
     Error:
       type: object
       properties:
@@ -109,6 +92,13 @@ components:
               type: string
             code:
               type: integer
+    ObjectResponse:
+      type: object
+      description: Standard sevdesk single-object envelope.
+      properties:
+        objects:
+          type: object
+          additionalProperties: true
     ObjectList:
       type: object
       description: Standard sevdesk list envelope. The objects array carries the requested resources.
@@ -118,6 +108,13 @@ components:
           items:
             type: object
             additionalProperties: true
+  responses:
+    Unauthorized:
+      description: Missing or invalid API token.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     api_key:
       type: apiKey
