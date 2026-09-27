@@ -76,41 +76,6 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
-  parameters:
-    Limit:
-      name: limit
-      in: query
-      required: false
-      description: Limits the number of entries returned.
-      schema:
-        type: integer
-    PartId:
-      name: partId
-      in: path
-      required: true
-      description: The ID of the part.
-      schema:
-        type: integer
-    Offset:
-      name: offset
-      in: query
-      required: false
-      description: Number of entries to skip for pagination.
-      schema:
-        type: integer
-  responses:
-    NotFound:
-      description: The requested resource was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Missing or invalid API token.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   schemas:
     Error:
       type: object
@@ -162,6 +127,41 @@ components:
           items:
             type: object
             additionalProperties: true
+  parameters:
+    Limit:
+      name: limit
+      in: query
+      required: false
+      description: Limits the number of entries returned.
+      schema:
+        type: integer
+    PartId:
+      name: partId
+      in: path
+      required: true
+      description: The ID of the part.
+      schema:
+        type: integer
+    Offset:
+      name: offset
+      in: query
+      required: false
+      description: Number of entries to skip for pagination.
+      schema:
+        type: integer
+  responses:
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Missing or invalid API token.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     api_key:
       type: apiKey

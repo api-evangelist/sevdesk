@@ -59,28 +59,6 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
-  parameters:
-    Limit:
-      name: limit
-      in: query
-      required: false
-      description: Limits the number of entries returned.
-      schema:
-        type: integer
-    Offset:
-      name: offset
-      in: query
-      required: false
-      description: Number of entries to skip for pagination.
-      schema:
-        type: integer
-    Embed:
-      name: embed
-      in: query
-      required: false
-      description: Comma-separated list of nested resources to embed fully in the response instead of returning only their id and objectName.
-      schema:
-        type: string
   schemas:
     Error:
       type: object
@@ -108,6 +86,28 @@ components:
           items:
             type: object
             additionalProperties: true
+  parameters:
+    Limit:
+      name: limit
+      in: query
+      required: false
+      description: Limits the number of entries returned.
+      schema:
+        type: integer
+    Offset:
+      name: offset
+      in: query
+      required: false
+      description: Number of entries to skip for pagination.
+      schema:
+        type: integer
+    Embed:
+      name: embed
+      in: query
+      required: false
+      description: Comma-separated list of nested resources to embed fully in the response instead of returning only their id and objectName.
+      schema:
+        type: string
   responses:
     Unauthorized:
       description: Missing or invalid API token.

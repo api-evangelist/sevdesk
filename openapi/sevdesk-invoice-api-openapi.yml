@@ -127,6 +127,33 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
+  schemas:
+    Error:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            message:
+              type: string
+            code:
+              type: integer
+    ObjectResponse:
+      type: object
+      description: Standard sevdesk single-object envelope.
+      properties:
+        objects:
+          type: object
+          additionalProperties: true
+    ObjectList:
+      type: object
+      description: Standard sevdesk list envelope. The objects array carries the requested resources.
+      properties:
+        objects:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
   parameters:
     Limit:
       name: limit
@@ -169,33 +196,6 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-  schemas:
-    Error:
-      type: object
-      properties:
-        error:
-          type: object
-          properties:
-            message:
-              type: string
-            code:
-              type: integer
-    ObjectResponse:
-      type: object
-      description: Standard sevdesk single-object envelope.
-      properties:
-        objects:
-          type: object
-          additionalProperties: true
-    ObjectList:
-      type: object
-      description: Standard sevdesk list envelope. The objects array carries the requested resources.
-      properties:
-        objects:
-          type: array
-          items:
-            type: object
-            additionalProperties: true
   securitySchemes:
     api_key:
       type: apiKey

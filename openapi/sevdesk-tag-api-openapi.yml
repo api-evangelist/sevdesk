@@ -60,6 +60,16 @@ paths:
           $ref: '#/components/responses/Unauthorized'
 components:
   schemas:
+    Error:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            message:
+              type: string
+            code:
+              type: integer
     ObjectResponse:
       type: object
       description: Standard sevdesk single-object envelope.
@@ -76,16 +86,6 @@ components:
           items:
             type: object
             additionalProperties: true
-    Error:
-      type: object
-      properties:
-        error:
-          type: object
-          properties:
-            message:
-              type: string
-            code:
-              type: integer
   responses:
     Unauthorized:
       description: Missing or invalid API token.
