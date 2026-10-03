@@ -117,6 +117,13 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   schemas:
+    ObjectResponse:
+      type: object
+      description: Standard sevdesk single-object envelope.
+      properties:
+        objects:
+          type: object
+          additionalProperties: true
     Error:
       type: object
       properties:
@@ -127,13 +134,6 @@ components:
               type: string
             code:
               type: integer
-    ObjectResponse:
-      type: object
-      description: Standard sevdesk single-object envelope.
-      properties:
-        objects:
-          type: object
-          additionalProperties: true
     ObjectList:
       type: object
       description: Standard sevdesk list envelope. The objects array carries the requested resources.
@@ -151,20 +151,6 @@ components:
       description: Limits the number of entries returned.
       schema:
         type: integer
-    Offset:
-      name: offset
-      in: query
-      required: false
-      description: Number of entries to skip for pagination.
-      schema:
-        type: integer
-    OrderId:
-      name: orderId
-      in: path
-      required: true
-      description: The ID of the order.
-      schema:
-        type: integer
     Embed:
       name: embed
       in: query
@@ -172,6 +158,20 @@ components:
       description: Comma-separated list of nested resources to embed fully in the response instead of returning only their id and objectName.
       schema:
         type: string
+    OrderId:
+      name: orderId
+      in: path
+      required: true
+      description: The ID of the order.
+      schema:
+        type: integer
+    Offset:
+      name: offset
+      in: query
+      required: false
+      description: Number of entries to skip for pagination.
+      schema:
+        type: integer
   responses:
     NotFound:
       description: The requested resource was not found.

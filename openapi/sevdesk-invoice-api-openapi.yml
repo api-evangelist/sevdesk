@@ -128,6 +128,13 @@ paths:
           $ref: '#/components/responses/Unauthorized'
 components:
   schemas:
+    ObjectResponse:
+      type: object
+      description: Standard sevdesk single-object envelope.
+      properties:
+        objects:
+          type: object
+          additionalProperties: true
     Error:
       type: object
       properties:
@@ -138,13 +145,6 @@ components:
               type: string
             code:
               type: integer
-    ObjectResponse:
-      type: object
-      description: Standard sevdesk single-object envelope.
-      properties:
-        objects:
-          type: object
-          additionalProperties: true
     ObjectList:
       type: object
       description: Standard sevdesk list envelope. The objects array carries the requested resources.
@@ -162,6 +162,13 @@ components:
       description: Limits the number of entries returned.
       schema:
         type: integer
+    Embed:
+      name: embed
+      in: query
+      required: false
+      description: Comma-separated list of nested resources to embed fully in the response instead of returning only their id and objectName.
+      schema:
+        type: string
     InvoiceId:
       name: invoiceId
       in: path
@@ -176,13 +183,6 @@ components:
       description: Number of entries to skip for pagination.
       schema:
         type: integer
-    Embed:
-      name: embed
-      in: query
-      required: false
-      description: Comma-separated list of nested resources to embed fully in the response instead of returning only their id and objectName.
-      schema:
-        type: string
   responses:
     NotFound:
       description: The requested resource was not found.

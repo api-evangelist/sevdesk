@@ -77,16 +77,13 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   schemas:
-    Error:
+    ObjectResponse:
       type: object
+      description: Standard sevdesk single-object envelope.
       properties:
-        error:
+        objects:
           type: object
-          properties:
-            message:
-              type: string
-            code:
-              type: integer
+          additionalProperties: true
     Part:
       type: object
       description: A part / article with pricing and stock.
@@ -111,13 +108,16 @@ components:
       - name
       - partNumber
       - unity
-    ObjectResponse:
+    Error:
       type: object
-      description: Standard sevdesk single-object envelope.
       properties:
-        objects:
+        error:
           type: object
-          additionalProperties: true
+          properties:
+            message:
+              type: string
+            code:
+              type: integer
     ObjectList:
       type: object
       description: Standard sevdesk list envelope. The objects array carries the requested resources.
@@ -135,18 +135,18 @@ components:
       description: Limits the number of entries returned.
       schema:
         type: integer
-    PartId:
-      name: partId
-      in: path
-      required: true
-      description: The ID of the part.
-      schema:
-        type: integer
     Offset:
       name: offset
       in: query
       required: false
       description: Number of entries to skip for pagination.
+      schema:
+        type: integer
+    PartId:
+      name: partId
+      in: path
+      required: true
+      description: The ID of the part.
       schema:
         type: integer
   responses:

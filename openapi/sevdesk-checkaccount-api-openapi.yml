@@ -53,6 +53,13 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   schemas:
+    ObjectResponse:
+      type: object
+      description: Standard sevdesk single-object envelope.
+      properties:
+        objects:
+          type: object
+          additionalProperties: true
     Error:
       type: object
       properties:
@@ -63,13 +70,6 @@ components:
               type: string
             code:
               type: integer
-    ObjectResponse:
-      type: object
-      description: Standard sevdesk single-object envelope.
-      properties:
-        objects:
-          type: object
-          additionalProperties: true
     ObjectList:
       type: object
       description: Standard sevdesk list envelope. The objects array carries the requested resources.

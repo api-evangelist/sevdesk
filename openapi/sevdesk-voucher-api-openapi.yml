@@ -80,6 +80,13 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   schemas:
+    ObjectResponse:
+      type: object
+      description: Standard sevdesk single-object envelope.
+      properties:
+        objects:
+          type: object
+          additionalProperties: true
     Error:
       type: object
       properties:
@@ -90,13 +97,6 @@ components:
               type: string
             code:
               type: integer
-    ObjectResponse:
-      type: object
-      description: Standard sevdesk single-object envelope.
-      properties:
-        objects:
-          type: object
-          additionalProperties: true
     ObjectList:
       type: object
       description: Standard sevdesk list envelope. The objects array carries the requested resources.
@@ -107,25 +107,11 @@ components:
             type: object
             additionalProperties: true
   parameters:
-    VoucherId:
-      name: voucherId
-      in: path
-      required: true
-      description: The ID of the voucher.
-      schema:
-        type: integer
     Limit:
       name: limit
       in: query
       required: false
       description: Limits the number of entries returned.
-      schema:
-        type: integer
-    Offset:
-      name: offset
-      in: query
-      required: false
-      description: Number of entries to skip for pagination.
       schema:
         type: integer
     Embed:
@@ -135,6 +121,20 @@ components:
       description: Comma-separated list of nested resources to embed fully in the response instead of returning only their id and objectName.
       schema:
         type: string
+    Offset:
+      name: offset
+      in: query
+      required: false
+      description: Number of entries to skip for pagination.
+      schema:
+        type: integer
+    VoucherId:
+      name: voucherId
+      in: path
+      required: true
+      description: The ID of the voucher.
+      schema:
+        type: integer
   responses:
     NotFound:
       description: The requested resource was not found.
