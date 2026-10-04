@@ -214,6 +214,8 @@ apis:
   humanURL: https://api.sevdesk.de/
   baseURL: https://my.sevdesk.de/api/v1
   tags:
+  - CreditNote
+  tags_raw:
   - Credit Note
   properties:
   - type: OpenAPI
@@ -227,6 +229,9 @@ apis:
   - type: OpenCollection
     url: collections/sevdesk.opencollection.json
 common:
+- type: CapabilityMap
+  url: capabilities/sevdesk-capability-edges.yml
+  name: sevdesk Business Capability Map
 - type: AgenticAccess
   url: agentic-access/sevdesk-agentic-access.yml
 - type: DomainSecurity
