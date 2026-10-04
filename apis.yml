@@ -214,8 +214,6 @@ apis:
   humanURL: https://api.sevdesk.de/
   baseURL: https://my.sevdesk.de/api/v1
   tags:
-  - CreditNote
-  tags_raw:
   - Credit Note
   properties:
   - type: OpenAPI

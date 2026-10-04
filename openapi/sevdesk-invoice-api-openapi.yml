@@ -127,53 +127,19 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
-  schemas:
-    ObjectResponse:
-      type: object
-      description: Standard sevdesk single-object envelope.
-      properties:
-        objects:
-          type: object
-          additionalProperties: true
-    Error:
-      type: object
-      properties:
-        error:
-          type: object
-          properties:
-            message:
-              type: string
-            code:
-              type: integer
-    ObjectList:
-      type: object
-      description: Standard sevdesk list envelope. The objects array carries the requested resources.
-      properties:
-        objects:
-          type: array
-          items:
-            type: object
-            additionalProperties: true
   parameters:
-    Limit:
-      name: limit
-      in: query
-      required: false
-      description: Limits the number of entries returned.
-      schema:
-        type: integer
-    Embed:
-      name: embed
-      in: query
-      required: false
-      description: Comma-separated list of nested resources to embed fully in the response instead of returning only their id and objectName.
-      schema:
-        type: string
     InvoiceId:
       name: invoiceId
       in: path
       required: true
       description: The ID of the invoice.
+      schema:
+        type: integer
+    Limit:
+      name: limit
+      in: query
+      required: false
+      description: Limits the number of entries returned.
       schema:
         type: integer
     Offset:
@@ -183,6 +149,13 @@ components:
       description: Number of entries to skip for pagination.
       schema:
         type: integer
+    Embed:
+      name: embed
+      in: query
+      required: false
+      description: Comma-separated list of nested resources to embed fully in the response instead of returning only their id and objectName.
+      schema:
+        type: string
   responses:
     NotFound:
       description: The requested resource was not found.
@@ -196,6 +169,33 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
+  schemas:
+    ObjectList:
+      type: object
+      description: Standard sevdesk list envelope. The objects array carries the requested resources.
+      properties:
+        objects:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
+    Error:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            message:
+              type: string
+            code:
+              type: integer
+    ObjectResponse:
+      type: object
+      description: Standard sevdesk single-object envelope.
+      properties:
+        objects:
+          type: object
+          additionalProperties: true
   securitySchemes:
     api_key:
       type: apiKey

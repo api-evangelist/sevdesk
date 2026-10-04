@@ -57,33 +57,6 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
-  schemas:
-    ObjectResponse:
-      type: object
-      description: Standard sevdesk single-object envelope.
-      properties:
-        objects:
-          type: object
-          additionalProperties: true
-    Error:
-      type: object
-      properties:
-        error:
-          type: object
-          properties:
-            message:
-              type: string
-            code:
-              type: integer
-    ObjectList:
-      type: object
-      description: Standard sevdesk list envelope. The objects array carries the requested resources.
-      properties:
-        objects:
-          type: array
-          items:
-            type: object
-            additionalProperties: true
   parameters:
     Limit:
       name: limit
@@ -99,6 +72,33 @@ components:
       description: Number of entries to skip for pagination.
       schema:
         type: integer
+  schemas:
+    ObjectList:
+      type: object
+      description: Standard sevdesk list envelope. The objects array carries the requested resources.
+      properties:
+        objects:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
+    Error:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            message:
+              type: string
+            code:
+              type: integer
+    ObjectResponse:
+      type: object
+      description: Standard sevdesk single-object envelope.
+      properties:
+        objects:
+          type: object
+          additionalProperties: true
   responses:
     Unauthorized:
       description: Missing or invalid API token.

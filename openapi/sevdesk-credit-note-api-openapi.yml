@@ -59,14 +59,38 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
+  parameters:
+    Limit:
+      name: limit
+      in: query
+      required: false
+      description: Limits the number of entries returned.
+      schema:
+        type: integer
+    Offset:
+      name: offset
+      in: query
+      required: false
+      description: Number of entries to skip for pagination.
+      schema:
+        type: integer
+    Embed:
+      name: embed
+      in: query
+      required: false
+      description: Comma-separated list of nested resources to embed fully in the response instead of returning only their id and objectName.
+      schema:
+        type: string
   schemas:
-    ObjectResponse:
+    ObjectList:
       type: object
-      description: Standard sevdesk single-object envelope.
+      description: Standard sevdesk list envelope. The objects array carries the requested resources.
       properties:
         objects:
-          type: object
-          additionalProperties: true
+          type: array
+          items:
+            type: object
+            additionalProperties: true
     Error:
       type: object
       properties:
@@ -77,37 +101,13 @@ components:
               type: string
             code:
               type: integer
-    ObjectList:
+    ObjectResponse:
       type: object
-      description: Standard sevdesk list envelope. The objects array carries the requested resources.
+      description: Standard sevdesk single-object envelope.
       properties:
         objects:
-          type: array
-          items:
-            type: object
-            additionalProperties: true
-  parameters:
-    Limit:
-      name: limit
-      in: query
-      required: false
-      description: Limits the number of entries returned.
-      schema:
-        type: integer
-    Embed:
-      name: embed
-      in: query
-      required: false
-      description: Comma-separated list of nested resources to embed fully in the response instead of returning only their id and objectName.
-      schema:
-        type: string
-    Offset:
-      name: offset
-      in: query
-      required: false
-      description: Number of entries to skip for pagination.
-      schema:
-        type: integer
+          type: object
+          additionalProperties: true
   responses:
     Unauthorized:
       description: Missing or invalid API token.

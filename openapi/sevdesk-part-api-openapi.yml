@@ -76,57 +76,6 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
-  schemas:
-    ObjectResponse:
-      type: object
-      description: Standard sevdesk single-object envelope.
-      properties:
-        objects:
-          type: object
-          additionalProperties: true
-    Part:
-      type: object
-      description: A part / article with pricing and stock.
-      properties:
-        name:
-          type: string
-        partNumber:
-          type: string
-        stock:
-          type: number
-        price:
-          type: number
-        unity:
-          type: object
-          description: Unit reference (id + objectName Unity).
-          properties:
-            id:
-              type: integer
-            objectName:
-              type: string
-      required:
-      - name
-      - partNumber
-      - unity
-    Error:
-      type: object
-      properties:
-        error:
-          type: object
-          properties:
-            message:
-              type: string
-            code:
-              type: integer
-    ObjectList:
-      type: object
-      description: Standard sevdesk list envelope. The objects array carries the requested resources.
-      properties:
-        objects:
-          type: array
-          items:
-            type: object
-            additionalProperties: true
   parameters:
     Limit:
       name: limit
@@ -162,6 +111,57 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
+  schemas:
+    ObjectList:
+      type: object
+      description: Standard sevdesk list envelope. The objects array carries the requested resources.
+      properties:
+        objects:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
+    Error:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            message:
+              type: string
+            code:
+              type: integer
+    Part:
+      type: object
+      description: A part / article with pricing and stock.
+      properties:
+        name:
+          type: string
+        partNumber:
+          type: string
+        stock:
+          type: number
+        price:
+          type: number
+        unity:
+          type: object
+          description: Unit reference (id + objectName Unity).
+          properties:
+            id:
+              type: integer
+            objectName:
+              type: string
+      required:
+      - name
+      - partNumber
+      - unity
+    ObjectResponse:
+      type: object
+      description: Standard sevdesk single-object envelope.
+      properties:
+        objects:
+          type: object
+          additionalProperties: true
   securitySchemes:
     api_key:
       type: apiKey
