@@ -148,3 +148,51 @@ plans:
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
+x-canonical:
+  generated: '2026-10-08'
+  vocabulary: all/0-working/economics/plans-canonical.yml
+  models:
+  - subscription
+  units:
+  - object
+  plans:
+  - name: Free Trial
+    access: free
+    model: subscription
+    model_how: derived
+    units:
+    - object
+    periods:
+    - month
+  - name: Rechnung (Invoicing)
+    access: paid
+    model: subscription
+    model_how: derived
+    units:
+    - object
+    periods:
+    - month
+  - name: Buchhaltung (Accounting)
+    access: paid
+    model: subscription
+    model_how: derived
+    units:
+    - object
+    periods:
+    - month
+  - name: Buchhaltung Pro
+    access: paid
+    model: subscription
+    model_how: derived
+    units:
+    - object
+    periods:
+    - month
+  - name: Warenwirtschaft (Inventory / ERP)
+    access: paid
+    model: subscription
+    model_how: derived
+    units:
+    - object
+    periods:
+    - month
